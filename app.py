@@ -195,9 +195,9 @@ if show_financial_metrics:
 # Checkbox to toggle Life Time Value
 show_ltv = st.checkbox("Life Time Value")
 if show_ltv: 
-    st.write(' Definition:')
+
     # Additional insights
-    st.write("Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
+    st.write("Definition: Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
     # Column chart for Payback by year
     fig_payback_chart = go.Figure()
 
