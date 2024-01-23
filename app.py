@@ -142,10 +142,10 @@ customer_base_data = {
     'Active Rate': processed_data['Active Rate'],
     'Active Customers': processed_data['active_customer'],
     'Funding Rate': processed_data['Funding Rate'],
-    # 'Funded Customers': processed_data['Funded Customer']  # Remove or replace this line
+    'Funded Customers': processed_data['Funded Customer']  # Include this line
 }
 
 customer_base_table = pd.DataFrame(customer_base_data)
 st.table(customer_base_table)
 
-st.title('Thank You')
+# ... (rest of the code)
