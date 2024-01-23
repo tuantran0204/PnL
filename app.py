@@ -83,7 +83,9 @@ def create_column_chart(fig, x, y, title):
     fig.update_layout(title=title)
     fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
-
+    
+logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
+st.image(logo_url, use_column_width=False, width=200)
 logo_url = "https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-timo-V.png"
 st.image(logo_url, use_column_width=False, width=200)
 
@@ -254,6 +256,5 @@ if show_ltv:
    
 st.subheader('Thank You')
 
-logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
-st.image(logo_url, use_column_width=False, width=400)
+
 
