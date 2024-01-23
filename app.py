@@ -154,6 +154,8 @@ if show_financial_metrics:
     fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_profitability_column)
+# Column EBIT
+fig_total_ebit_chart = go.Figure()
 # Add total EBIT 
 fig_total_ebit_chart.add_trace(go.Bar(
     x=processed_data['Year'],
@@ -188,8 +190,6 @@ st.plotly_chart(fig_total_ebit_chart)
 
     st.plotly_chart(fig_margin_chart)
 
-    # Column EBIT
-fig_total_ebit_chart = go.Figure()
 
 st.subheader('Thank You')
 
