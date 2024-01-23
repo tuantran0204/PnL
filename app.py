@@ -154,23 +154,25 @@ if show_financial_metrics:
     fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_profitability_column)
-# Column EBIT
-fig_total_ebit_chart = go.Figure()
-# Add total EBIT 
-fig_total_ebit_chart.add_trace(go.Bar(
-    x=processed_data['Year'],
-    y=processed_data['EBIT'],
-    name='EBIT',
-    marker_color=processed_data['EBIT'].apply(lambda x: 'red' if x < 0 else 'green'),  # Color based on EBIT value
-    text=processed_data['EBIT'].round(2),
-    textposition='outside'
-))
 
-fig_total_ebit_chart.update_layout(title='Total EBIT (Unit: Mil $)')
-fig_total_ebit_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
-fig_total_ebit_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+    # Column EBIT
+    fig_total_ebit_chart = go.Figure()
+    # Add total EBIT 
+    fig_total_ebit_chart.add_trace(go.Bar(
+        x=processed_data['Year'],
+        y=processed_data['EBIT'],
+        name='EBIT',
+        marker_color=processed_data['EBIT'].apply(lambda x: 'red' if x < 0 else 'green'),  # Color based on EBIT value
+        text=processed_data['EBIT'].round(2),
+        textposition='outside'
+    ))
 
-st.plotly_chart(fig_total_ebit_chart)
+    fig_total_ebit_chart.update_layout(title='Total EBIT (Unit: Mil $)')
+    fig_total_ebit_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_total_ebit_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_total_ebit_chart)
+
     # Column GM, EBIT margin  by year
     fig_margin_chart = go.Figure()
 
@@ -189,7 +191,6 @@ st.plotly_chart(fig_total_ebit_chart)
     fig_margin_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_margin_chart)
-
 
 st.subheader('Thank You')
 
