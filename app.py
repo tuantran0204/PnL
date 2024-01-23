@@ -14,10 +14,6 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['Total Customer'] = pd.to_numeric(data['Total Customer'], errors='coerce')
     data['Active Rate'] = pd.to_numeric(data['Active Rate'], errors='coerce')
 
-    # Calculate active customer and inactive customer for all years
-    data['active_customer'] = data['Total Customer'] * data['Active Rate']
-    data['inactive_customer'] = data['Total Customer'] - data['active_customer']
-
     # Apply Funded CAC increase only for the specified years (2024 to 2028)
     mask_cac = (data['Year'] >= 2024) & (data['Year'] <= 2028)
     data.loc[mask_cac, 'Funded CAC'] = (data.loc[mask_cac, 'Funded CAC'] * 0) + funded_cac_increase
@@ -53,6 +49,10 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
     mask_cac = (data['Year'] == 2028)
     data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
+
+    # Calculate active customer and inactive customer for all years
+    data['active_customer'] = data['Total Customer'] * data['Active Rate']
+    data['inactive_customer'] = data['Total Customer'] - data['active_customer']
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
