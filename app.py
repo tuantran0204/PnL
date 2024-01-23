@@ -30,15 +30,6 @@ def calculate_metrics(data, funded_cac_increase, *new_customer_increases):
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
     data['payback'] = data['payback'].clip(lower=0)
 
-    # Calculate New Customer and Total Customer for each year
-    for year, new_customer_increase_value in zip(range(2024, 2029), new_customer_increases):
-        new_customer_column = f'New Customer {year}'
-        total_customer_column = f'Total Customer {year}'
-
-        mask = (data['Year'] == year)
-        data.loc[mask, new_customer_column] = (data.loc[mask, new_customer_column] * 0) + new_customer_increase_value
-
-        data.loc[mask, total_customer_column] = data.loc[mask, 'Total Customer'] + data.loc[mask, new_customer_column]
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
