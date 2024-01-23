@@ -62,8 +62,8 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
     data['Gross Profit'] = data['gp_per_active'] * data['active_customer'] / 1000
     data['EBIT'] =  data['Gross Profit'] - ((data['Staff Cost'] +  data['Opex'] + data['Retaining'] + data['Selling Cost']) / 1000000) - (data['Funded CAC'] * data['Funded Customer'] / 1000)
-    data['Gross Margin'] = data['Gross Profit'] / data['revenue']
-    data['EBIT Margin'] = data['EBIT'] / data['revenue']
+    data['Gross Margin'] = data['Gross Profit'] / data['revenue']  * 100
+    data['EBIT Margin'] = data['EBIT'] / data['revenue']  * 100
 
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
@@ -159,11 +159,11 @@ if show_financial_metrics:
     fig_margin_chart = go.Figure()
 
     # Add GM, EBIT margin 
-    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Gross Margin'] * 100,
+    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Gross Margin'],
                                         mode='lines+text', name='Gross Margin', line=dict(color='#EB3300'),
                                         text=processed_data['Gross Margin'].round(2),
                                         textposition='top left', textfont=dict(color='#A9A9A9')))
-    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['EBIT Margin'] * 100,
+    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['EBIT Margin'],
                                         mode='lines+text', name='EBIT Margin', line=dict(color='#EB3300'),
                                         text=processed_data['EBIT Margin'].round(2),
                                         textposition='top left', textfont=dict(color='#7F7F7F')))
