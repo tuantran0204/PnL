@@ -158,21 +158,18 @@ if show_customer_base_metrics:
     # Customer Acquisition
 fig_customer_acquisition_column = go.Figure()
 
-# Add New Customers
 fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['New Customer'],
                                                  name='New Customers',
                                                  marker_color='#563D82',  
                                                  text=processed_data['New Customer'].round(2),
                                                  textposition='outside'))
 
-# Add Funded Customers
 fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded Customer'],
                                                  name='New Funded Customers',
                                                  marker_color='#A9A9A9',  # Set color to grey
                                                  text=processed_data['Funded Customer'].round(2),
                                                  textposition='outside'))
 
-# Add Funding Rate as a line chart with a secondary y-axis
 fig_customer_acquisition_column.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Funding Rate'],
                                                       name='Funding Rate',
                                                       mode='lines+text',
@@ -185,10 +182,10 @@ fig_customer_acquisition_column.add_trace(go.Scatter(x=processed_data['Year'], y
 fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
 fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
 fig_customer_acquisition_column.update_layout(
-    yaxis2=dict(title='Funding Rate (%)', overlaying='y', side='right', showgrid=False)
+    yaxis2=dict(, overlaying='y', side='right', showgrid=False, title_font=dict(color='#EB3300'))
 )
 fig_customer_acquisition_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
-fig_customer_acquisition_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+fig_customer_acquisition_column.update_yaxes(showgrid=False, title_font=dict(color='#563D82'))  # Remove y-axis gridlines
 st.plotly_chart(fig_customer_acquisition_column)
 
     
