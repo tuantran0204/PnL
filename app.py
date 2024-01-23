@@ -62,7 +62,7 @@ data = pd.read_csv("./data.csv")
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
-    funded_cac_increase = st.sidebar.number_input('Funded CAC Input 2024-2028 (Unit: USD)', min_value=5, max_value=30, step=1, value=10)
+    funded_cac_increase = st.sidebar.number_input('Funded CAC Input 2024-2028 (Unit: Mil $)', min_value=5, max_value=30, step=1, value=10)
 
     # Process and calculate additional metrics with user input values
     processed_data = calculate_metrics(data, funded_cac_increase)
@@ -78,7 +78,7 @@ if 'data' in locals() and not data.empty:
     fig_revenue_chart = go.Figure()
 
     # Add Revenue to the column chart with a different color
-    fig_revenue_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['revenue'],
+    fig_revenue_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['revenue']/10^6,
                                       name='Revenue',
                                       marker_color='#563D82',  
                                       text=processed_data['revenue'].round(2),
