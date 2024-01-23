@@ -84,8 +84,8 @@ def create_column_chart(fig, x, y, title):
     fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
-logo_url = "https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/company-banner-pic/ea2b671e0433adbe4555b83b928b1e9c.png"
-st.image(logo_url, use_column_width=False, width=800)
+logo_url = "https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-timo-V.png"
+st.image(logo_url, use_column_width=False, width=200)
 
 # Title of the app
 st.title('Pross & Loss Simulator')
@@ -254,6 +254,6 @@ if show_ltv:
    
 st.subheader('Thank You')
 
-logo_url = "https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-timo-V.png"
-st.image(logo_url, use_column_width=False, width=150)
+logo_url = "https://ictv.1cdn.vn/thumbs/600x315/2021/08/10/ictvietnam-mediacdn-vn-timo-1628512912128368312701-0-28-550-908-crop-16285129204861139492820.png"
+st.image(logo_url, use_column_width=False, width=800)
 
