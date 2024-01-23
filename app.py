@@ -133,9 +133,9 @@ if 'data' in locals() and not data.empty:
 
 # Visualization
 
-# Checkbox to toggle Customer Base Metrics
-show_customer_base_metrics = st.checkbox("Customer Base Metrics")
-if show_customer_base_metrics:
+# Checkbox to toggle Customer Base and Acquisition Metrics
+show_customer_metrics = st.checkbox("Customer Metrics")
+if show_customer_metrics:
 
     # Customer Base
     fig_customer_column = go.Figure()
@@ -156,37 +156,34 @@ if show_customer_base_metrics:
     st.plotly_chart(fig_customer_column)
     
     # Customer Acquisition
-fig_customer_acquisition_column = go.Figure()
+    fig_customer_acquisition_column = go.Figure()
+    fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['New Customer'],
+                                                     name='New Customers',
+                                                     marker_color='#563D82',  
+                                                     text=processed_data['New Customer'].round(2),
+                                                     textposition='outside'))
+    fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded Customer'],
+                                                     name='New Funded Customers',
+                                                     marker_color='#A9A9A9',  # Set color to grey
+                                                     text=processed_data['Funded Customer'].round(2),
+                                                     textposition='outside'))
+    fig_customer_acquisition_column.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Funding Rate'],
+                                                          name='% Funding Rate',
+                                                          mode='lines+text',
+                                                          line=dict(color='#EB3300'),
+                                                          text=processed_data['Funding Rate'].round(2),
+                                                          textposition='bottom right',
+                                                          textfont=dict(color='#EB3300'),
+                                                          yaxis='y2'))  # Assign to secondary y-axis
 
-fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['New Customer'],
-                                                 name='New Customers',
-                                                 marker_color='#563D82',  
-                                                 text=processed_data['New Customer'].round(2),
-                                                 textposition='outside'))
-
-fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded Customer'],
-                                                 name='New Funded Customers',
-                                                 marker_color='#A9A9A9',  # Set color to grey
-                                                 text=processed_data['Funded Customer'].round(2),
-                                                 textposition='outside'))
-
-fig_customer_acquisition_column.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Funding Rate'],
-                                                      name='% Funding Rate',
-                                                      mode='lines+text',
-                                                      line=dict(color='#EB3300'),
-                                                      text=processed_data['Funding Rate'].round(2),
-                                                      textposition='bottom right',
-                                                      textfont=dict(color='#EB3300'),
-                                                      yaxis='y2'))  # Assign to secondary y-axis
-
-fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
-fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
-fig_customer_acquisition_column.update_layout(
-    yaxis2=dict( overlaying='y', side='right', showgrid=False)
-)
-fig_customer_acquisition_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
-fig_customer_acquisition_column.update_yaxes(showgrid=False)
-st.plotly_chart(fig_customer_acquisition_column)
+    fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
+    fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
+    fig_customer_acquisition_column.update_layout(
+        yaxis2=dict(overlaying='y', side='right', showgrid=False)
+    )
+    fig_customer_acquisition_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_customer_acquisition_column.update_yaxes(showgrid=False)
+    st.plotly_chart(fig_customer_acquisition_column)
 
     
 # Checkbox to toggle Financial Metrics
