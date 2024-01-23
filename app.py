@@ -174,8 +174,8 @@ if show_financial_metrics:
 
     st.plotly_chart(fig_margin_chart)
 
-    fig_test_chart = go.Figure()
-    create_column_chart(fig_test_chart, processed_data['Year'], processed_data['EBIT'], 'EBIT (Unit: Thousand)')
-    st.plotly_chart(fig_test_chart)
+    fig_EBIT_chart = go.Figure()
+    create_column_chart(fig_EBIT_chart, processed_data['Year'], processed_data['EBIT'], 'Total EBIT (Unit: Mil $)')
+    st.plotly_chart(fig_EBIT_chart)
 
 st.subheader('Thank You')
