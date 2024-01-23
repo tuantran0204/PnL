@@ -61,6 +61,9 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
     data['Gross Profit'] = data['gp_per_active'] * data['active_customer'] / 1000
+    data['EBIT'] =  data['Gross Profit'] - (data['Funded Customer'] * data['Funded CAC']) - data['Staff Cost'] -  data['Opex'] - data['Retaining'] - data['Selling Cost'] 
+    data['Gross Margin'] = data['Gross Profit'] / data['revenue']
+    data['EBIT Margin'] = data['EBIT'] / data['revenue']
 
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
@@ -151,5 +154,24 @@ if show_financial_metrics:
     fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_profitability_column)
+
+    # Column chart for LTV/CAC by year
+    fig_line_chart = go.Figure()
+
+    # Add GM, EBIT margin 
+    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Gross Margin'],
+                                        mode='lines+text', name='Gross Margin', line=dict(color='#EB3300'),
+                                        text=processed_data['Gross Margin'].round(2),
+                                        textposition='top left', textfont=dict(color='#A9A9A9')))
+    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['EBIT Margin'],
+                                        mode='lines+text', name='EBIT Margin', line=dict(color='#EB3300'),
+                                        text=processed_data['EBIT Margin'].round(2),
+                                        textposition='top left', textfont=dict(color='#7F7F7F')))
+
+    fig_margin_chart.update_layout(title='Gross Margin vs EBIT Margin (%)')
+    fig_margin_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_margin_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_margin_chart)
 
 st.subheader('Thank You')
