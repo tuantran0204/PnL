@@ -67,7 +67,7 @@ if 'data' in locals() and not data.empty:
     new_customer_increase_2024 = st.sidebar.number_input('New Customer 2024', min_value=100000, max_value=3000000, step=1, value=400000)
 
     # Process and calculate additional metrics with user input values
-    processed_data = calculate_metrics(data, funded_cac_increase,new_customer_increase_2024)
+    processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increase_2024)
 
     st.subheader(' Definition:')
     # Additional insights
