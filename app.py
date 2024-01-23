@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Function to calculate additional metrics
-def calculate_metrics(data, funded_cac_increase):
+def calculate_metrics(data, funded_cac_increase, new_customer_increase_2024):
     # Assuming 'Year', 'Total Customer', 'Active Rate', 'New Customer', 'Funding Rate',
     # 'ARPU', 'Direct Cost', 'Churn Rate', 'Funded CAC' are columns in your data
 
