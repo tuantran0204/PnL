@@ -53,7 +53,7 @@ data = pd.read_csv("./data.csv")
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
-    new_customer_increases = [st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=data['New Customer']) for year in range(2024, 2029)]
+    new_customer_increases = [st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=400) for year in range(2024, 2029)]
     funded_cac_increase = st.sidebar.number_input('Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
 
     # Process and calculate additional metrics with user input values
