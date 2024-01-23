@@ -130,6 +130,9 @@ if 'data' in locals() and not data.empty:
 
     st.plotly_chart(fig_new_customer_chart)
 
+     # Column chart for Total Customer by year
+    fig_total_customer_chart = go.Figure()
+
      # Add total Customer to the column chart with a different color
     fig_total_customer_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Total Customer'],
                                       name='Total Customer',
