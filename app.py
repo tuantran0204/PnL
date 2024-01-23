@@ -136,7 +136,7 @@ if show_financial_metrics:
     fig_profitability_column = go.Figure()
     # Add GP
     fig_profitability_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['revenue'],
-                                               name='revenue',
+                                               name='Revenue',
                                                marker_color='#2774AE',  
                                                text=processed_data['revenue'].round(2),
                                                textposition='outside'))
