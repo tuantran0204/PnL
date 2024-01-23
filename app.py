@@ -98,8 +98,11 @@ show_customer_base_metrics = st.checkbox("Customer Base Metrics")
 if show_customer_base_metrics:
     # Column chart for New Customer by year
     fig_new_customer_chart = go.Figure()
-    create_column_chart(fig_new_customer_chart, processed_data['Year'], processed_data['New Customer'], 'New Customers (Unit: Thousand)')
-    st.plotly_chart(fig_new_customer_chart)
+    try:
+        create_column_chart(fig_new_customer_chart, processed_data['Year'], processed_data['New Customer'], 'New Customers (Unit: Thousand)')
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        st.write(processed_data[['Year', 'New Customer']])
 
     # Column chart for Total Customer by year
     fig_total_customer_chart = go.Figure()
