@@ -34,13 +34,13 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     mask_cac = (data['Year'] == 2024)
     data.loc[mask_cac, 'New Customer'] = new_customer_increases2024
     mask_cac = (data['Year'] == 2025)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024+ new_customer_increases2025
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2025
     mask_cac = (data['Year'] == 2026)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2026
     mask_cac = (data['Year'] == 2027)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2027
     mask_cac = (data['Year'] == 2028)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2028
         
     # Calculate Total customer 2024-2028
     mask_cac = (data['Year'] == 2024)
