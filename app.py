@@ -175,14 +175,12 @@ if show_financial_metrics:
     st.plotly_chart(fig_margin_chart)
 
 
-   # ... (previous code remains unchanged)
-
     # Add total EBIT 
     fig_total_ebit_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['EBIT'],
-                                          name='EBIT',
-                                          marker_color='#2774AE',  
-                                          text=processed_data['EBIT'].round(2),
-                                          textposition='outside'))
+                                      name='EBIT',
+                                      marker_color='#2774AE',  
+                                      text=processed_data['EBIT'].round(2),
+                                      textposition='outside'))
 
     fig_total_ebit_chart.update_layout(title='Total EBIT (Unit: Mil $)')
     fig_total_ebit_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
