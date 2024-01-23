@@ -185,7 +185,7 @@ fig_customer_acquisition_column.update_layout(
     yaxis2=dict(, overlaying='y', side='right', showgrid=False, title_font=dict(color='#EB3300'))
 )
 fig_customer_acquisition_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
-fig_customer_acquisition_column.update_yaxes(showgrid=False, title_font=dict(color='#563D82'))  # Remove y-axis gridlines
+fig_customer_acquisition_column.update_yaxes(showgrid=False, title_font=dict(color='#563D82'))
 st.plotly_chart(fig_customer_acquisition_column)
 
     
