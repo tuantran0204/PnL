@@ -54,7 +54,7 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
 
     # Calculate Revenue, GP/Active, total gross profit, LTV, LTV/CAC, Payback
     
-    data['Funded Customer'] = (data['active_customer'] * (data['Funding Rate']/100))
+    data['Funded Customer'] = data['Total Customer'] * (data['Active Rate']/100) * (data['Funding Rate']/100)
     
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
@@ -314,3 +314,20 @@ st.subheader('Thank You')
 logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
 st.image(logo_url, use_column_width=False, width=300)
 
+ # Column EBIT
+    fig_test_chart = go.Figure()
+    # Add total EBIT 
+    fig_test_chart.add_trace(go.Bar(
+        x=processed_data['Year'],
+        y=processed_data['EBIT'],
+        name='EBIT',
+        marker_color=processed_data['EBIT'].apply(lambda x: 'red' if x < 0 else 'green'),  # Color based on EBIT value
+        text=processed_data['EBIT'].round(2),
+        textposition='outside'
+    ))
+
+    fig_test_chart.update_layout(title='Total EBIT (Unit: Mil $)')
+    fig_test_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_test_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_test_chart)
