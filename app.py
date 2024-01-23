@@ -69,6 +69,7 @@ st.sidebar.title("Input Settings")
 data = pd.read_csv("./data.csv")
 # st.sidebar.write(data)
 
+
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
@@ -124,20 +125,17 @@ if 'data' in locals() and not data.empty:
     create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
     st.plotly_chart(fig_active_customer_chart)
 
+    # Create a table for Customer Base
+    st.subheader('Customer Base')
+    customer_base_data = {
+        'Year': processed_data['Year'],
+        'New Customers': processed_data['New Customer'],
+        'Total Customers': processed_data['Total Customer'],
+        'Active Rate': processed_data['Active Rate'],
+        'Active Customers': processed_data['active_customer'],
+        'Funding Rate': processed_data['Funding Rate'],
+        'Funded Customer': processed_data['Funded Customer']  # Include this line if 'Funded Customer' is a direct column
+    }
 
-# Create a table for Customer Base
-st.subheader('Customer Base')
-customer_base_data = {
-    'Year': processed_data['Year'],
-    'New Customers': processed_data['New Customer'],
-    'Total Customers': processed_data['Total Customer'],
-    'Active Rate': processed_data['Active Rate'],
-    'Active Customers': processed_data['active_customer'],
-    'Funding Rate': processed_data['Funding Rate'],
-    'Funded Customer': processed_data['Funded Customer']  # Include this line if 'Funded Customer' is a direct column
-}
-
-customer_base_table = pd.DataFrame(customer_base_data)
-st.table(customer_base_table)
-
-
+    customer_base_table = pd.DataFrame(customer_base_data)
+    st.table(customer_base_table)
