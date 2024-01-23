@@ -150,9 +150,9 @@ if show_customer_base_metrics:
                                                text=processed_data['Total Customer'].round(2),
                                                textposition='outside'))
     fig_customer_column.update_layout(barmode='group', title='Customer Base (Unit: Thousand)')
+    fig_customer_column.update_layout(legend=dict(traceorder='normal', y=1.02, x=0.5, orientation="h"))
     fig_customer_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_customer_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
-    fig_customer_column.update_layout(legend=dict(traceorder='normal'))
     st.plotly_chart(fig_customer_column)
     
     # Customer Acquisition
