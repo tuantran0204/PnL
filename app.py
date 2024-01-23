@@ -134,20 +134,18 @@ show_financial_metrics = st.checkbox("Financial Metrics")
 if show_financial_metrics:
     # Column chart for Revenue vs GP by year
     fig_profitability_column = go.Figure()
-    # Add revenue 
-    fig_profitability_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Gross Profit'],
-                                               name='Gross Profit',
-                                               marker_color='#A9A9A9',  # Set color to grey
-                                               text=processed_data['Gross Profit'].round(2),
-                                               textposition='outside'))
-
     # Add GP
     fig_profitability_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['revenue'],
                                                name='revenue',
                                                marker_color='#2774AE',  
                                                text=processed_data['revenue'].round(2),
                                                textposition='outside'))
-
+    # Add revenue 
+    fig_profitability_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Gross Profit'],
+                                               name='Gross Profit',
+                                               marker_color='#A9A9A9',  # Set color to grey
+                                               text=processed_data['Gross Profit'].round(2),
+                                               textposition='outside'))
     fig_profitability_column.update_layout(barmode='group', title='Profitability (Unit: Mil $)')
     fig_profitability_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
