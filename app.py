@@ -31,28 +31,14 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['payback'] = data['payback'].clip(lower=0)
 
     # Calculate New customer 2024-2028
-    mask_cac = (data['Year'] == 2024)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024
-    mask_cac = (data['Year'] == 2025)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024+ new_customer_increases2025
-    mask_cac = (data['Year'] == 2026)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026
-    mask_cac = (data['Year'] == 2027)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
-    mask_cac = (data['Year'] == 2028)
-    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
-        
+    for year in range(2024, 2029):
+        mask_cac = (data['Year'] == year)
+        data.loc[mask_cac, 'New Customer'] = sum(new_customer_increases2024[:year - 2024 + 1])
+
     # Calculate Total customer 2024-2028
-    mask_cac = (data['Year'] == 2024)
-    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024
-    mask_cac = (data['Year'] == 2025)
-    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024+ new_customer_increases2025
-    mask_cac = (data['Year'] == 2026)
-    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026
-    mask_cac = (data['Year'] == 2027)
-    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
-    mask_cac = (data['Year'] == 2028)
-    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
+    for year in range(2024, 2029):
+        mask_cac = (data['Year'] == year)
+        data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + sum(new_customer_increases2024[:year - 2024 + 1])
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
@@ -73,14 +59,14 @@ data = pd.read_csv("./data.csv")
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
-    new_customer_increases = {}
-    for year in range(2024, 2029):
     funded_cac_increase = st.sidebar.number_input('Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
     new_customer_increases2024 = st.sidebar.number_input('New Customer 2024 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 400)
     new_customer_increases2025 = st.sidebar.number_input('New Customer 2025 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 400)
     new_customer_increases2026 = st.sidebar.number_input('New Customer 2026 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 500)
     new_customer_increases2027 = st.sidebar.number_input('New Customer 2027 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 600)
     new_customer_increases2028 = st.sidebar.number_input('New Customer 2028 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 700)
+
+    new_customer_increases = [new_customer_increases2024, new_customer_increases2025, new_customer_increases2026, new_customer_increases2027, new_customer_increases2028]
 
     # Process and calculate additional metrics with user input values
     processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new_customer_increases2025, new_customer_increases2026, new_customer_increases2027, new_customer_increases2028)
@@ -117,7 +103,7 @@ if 'data' in locals() and not data.empty:
 
     # Column chart for Total Customer by year
     fig_total_customer_chart = go.Figure()
-    create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['Total_Customer'], 'Total Customers (Unit: Thousand)')
+    create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
     st.plotly_chart(fig_total_customer_chart)
 
     # Column chart for Active Customer by year
