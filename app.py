@@ -255,5 +255,5 @@ if show_ltv:
 st.subheader('Thank You')
 
 logo_url = "https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/company-banner-pic/ea2b671e0433adbe4555b83b928b1e9c.png"
-st.image(logo_url, use_column_width=False, width=2000)
+st.image(logo_url, use_column_width=False, width=1000)
 
