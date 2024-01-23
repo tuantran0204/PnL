@@ -204,7 +204,7 @@ if show_financial_metrics:
                                                text=processed_data['Gross Profit'].round(2),
                                                textposition='outside'))
     fig_profitability_column.update_layout(barmode='group', title='Profitability (Unit: Mil $)')
-    fig_profitability_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
+    fig_profitability_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
     fig_profitability_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
