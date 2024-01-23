@@ -124,12 +124,13 @@ if 'data' in locals() and not data.empty:
     create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
     st.plotly_chart(fig_total_customer_chart)
 
-    # Column chart for Active Customer by year
-    fig_active_customer_chart = go.Figure()
-    create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
-    st.plotly_chart(fig_active_customer_chart)
+# Column chart for Active Customer by year
+fig_active_customer_chart = go.Figure()
+create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
+st.plotly_chart(fig_active_customer_chart)
 
-   st.subheader('Customer Base (Unit: Thousand Customers)')
+# Corrected indentation for the next block
+st.subheader('Customer Base (Unit: Thousand Customers)')
 customer_base_data = {
     'Year': processed_data['Year'],
     'New Customers': processed_data['New Customer'].round(2),
