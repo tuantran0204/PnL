@@ -71,7 +71,6 @@ st.sidebar.title("Input Settings")
 data = pd.read_csv("./data.csv")
 # st.sidebar.write(data)
 
-
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
@@ -106,8 +105,15 @@ if 'data' in locals() and not data.empty:
         fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
         fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
-    # Corrected indentation
-with st.sidebar.expander("Customer Base"):
+    # Column chart for New Customer, Total Customer, and Active Customer by year
+    fig_customer_charts = go.Figure()
+    create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['New Customer'], 'New Customers (Unit: Thousand)')
+    create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
+    create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
+
+    st.plotly_chart(fig_customer_charts)
+
+    # Customer Base table
     st.write('Unit: Thousand Customers')
     customer_base_data = {
         'Year': processed_data['Year'],
@@ -121,14 +127,3 @@ with st.sidebar.expander("Customer Base"):
 
     customer_base_table = pd.DataFrame(customer_base_data)
     st.table(customer_base_table)
-
-# Visualization
-st.subheader(' Metrics Visualization:')
-
-# Column chart for New Customer, Total Customer, and Active Customer by year
-fig_customer_charts = go.Figure()
-create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['New Customer'], 'New Customers (Unit: Thousand)')
-create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
-create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
-
-st.plotly_chart(fig_customer_charts)
