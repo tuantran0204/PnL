@@ -109,10 +109,23 @@ if 'data' in locals() and not data.empty:
         fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
         fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
-    # Column chart for Revenue by year
-    fig_revenue_chart = go.Figure()
-    create_column_chart(fig_revenue_chart, processed_data['Year'], processed_data['revenue'], 'Revenue (Unit: Mil $)')
-    st.plotly_chart(fig_revenue_chart)
+
+# Corrected indentation for the next block
+st.subheader('Customer Base (Unit: Thousand Customers)')
+customer_base_data = {
+    'Year': processed_data['Year'],
+    'New Customers': processed_data['New Customer'].round(2),
+    'Total Customers': processed_data['Total Customer'].round(2),
+    '%Active Rate': processed_data['Active Rate'].round(2),
+    'Active Customers': processed_data['active_customer'].round(2),
+    '%Funding Rate': processed_data['Funding Rate'].round(2),
+    'Funded Customer': processed_data['Funded Customer'].round(2)
+}
+
+customer_base_table = pd.DataFrame(customer_base_data)
+st.table(customer_base_table)
+
+ 
 
     # Column chart for New Customer by year
     fig_new_customer_chart = go.Figure()
@@ -129,17 +142,7 @@ fig_active_customer_chart = go.Figure()
 create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
 st.plotly_chart(fig_active_customer_chart)
 
-# Corrected indentation for the next block
-st.subheader('Customer Base (Unit: Thousand Customers)')
-customer_base_data = {
-    'Year': processed_data['Year'],
-    'New Customers': processed_data['New Customer'].round(2),
-    'Total Customers': processed_data['Total Customer'].round(2),
-    '%Active Rate': processed_data['Active Rate'].round(2),
-    'Active Customers': processed_data['active_customer'].round(2),
-    '%Funding Rate': processed_data['Funding Rate'].round(2),
-    'Funded Customer': processed_data['Funded Customer'].round(2)
-}
-
-customer_base_table = pd.DataFrame(customer_base_data)
-st.table(customer_base_table)
+# Column chart for Revenue by year
+    fig_revenue_chart = go.Figure()
+    create_column_chart(fig_revenue_chart, processed_data['Year'], processed_data['revenue'], 'Revenue (Unit: Mil $)')
+    st.plotly_chart(fig_revenue_chart)
