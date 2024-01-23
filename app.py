@@ -155,8 +155,8 @@ if show_financial_metrics:
 
     st.plotly_chart(fig_profitability_column)
 
-    # Column chart for LTV/CAC by year
-    fig_line_chart = go.Figure()
+    # Column GM, EBIT margin  by year
+    fig_margin_chart = go.Figure()
 
     # Add GM, EBIT margin 
     fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Gross Margin'],
