@@ -18,14 +18,6 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     mask_cac = (data['Year'] >= 2024) & (data['Year'] <= 2028)
     data.loc[mask_cac, 'Funded CAC'] = (data.loc[mask_cac, 'Funded CAC'] * 0) + funded_cac_increase
 
-    # Calculate GP/Active, total gross profit, LTV, LTV/CAC, Payback
-    data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
-    data['total_gross_profit'] = data['gp_per_active'] * data['active_customer']
-    data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
-    data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
-    data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
-    data['payback'] = data['payback'].clip(lower=0)
-
     # Calculate New customer 2024-2028
     mask_cac = (data['Year'] == 2024)
     data.loc[mask_cac, 'New Customer'] = new_customer_increases2024
@@ -52,10 +44,15 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
 
     # Calculate active customer and inactive customer for all years
     data['active_customer'] = data['Total Customer'] * data['Active Rate']
-    data['inactive_customer'] = data['Total Customer'] - data['active_customer']
 
-    # Calculate Revenue
+    # Calculate Revenue, GP/Active, total gross profit, LTV, LTV/CAC, Payback
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
+    data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
+    data['total_gross_profit'] = data['gp_per_active'] * data['active_customer']
+    data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
+    data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
+    data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
+    data['payback'] = data['payback'].clip(lower=0)
 
     return data
 
