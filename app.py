@@ -36,7 +36,8 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases):
         data.loc[mask_new_customer, 'New Customer'] = (data.loc[mask_new_customer, 'New Customer'] * 0) + new_customer_increase_value
         
     # Calculate Total customer
-    data['total_customer'] = data['Total Customer'] + new_customer_increase_value
+    mask_cac = (data['Year'] >= 2024) & (data['Year'] <= 2028)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer'] * 0) + new_customer_increase_value
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
@@ -97,7 +98,7 @@ if 'data' in locals() and not data.empty:
 
     # Column chart for Total Customer by year
     fig_total_customer_chart = go.Figure()
-    create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['total_customer'], 'Total Customers (Unit: Thousand)')
+    create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
     st.plotly_chart(fig_total_customer_chart)
 
     # Column chart for Active Customer by year
