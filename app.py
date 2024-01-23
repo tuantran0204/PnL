@@ -167,6 +167,23 @@ if 'data' in locals() and not data.empty:
 
     st.plotly_chart(fig_total_customer_chart)
 
+    # Column chart for Active Customer by year
+    fig_active_customer_chart = go.Figure()
+
+     # Add total Customer to the column chart with a different color
+    fig_active_customer_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['active_customer'],
+                                      name='active_customer',
+                                      marker_color='#563D82',  
+                                      text=processed_data['active_customer'].round(2),
+                                      textposition='outside'))
+    
+    fig_active_customer_chart.update_layout(title='Active Customers (Unit: Thousand)')
+
+    fig_active_customer_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_active_customer_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_active_customer_chart)
+
 
     
     st.title('Thank You')
