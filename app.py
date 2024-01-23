@@ -182,7 +182,7 @@ fig_total_ebit_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data
                                       text=processed_data['EBIT'].round(2),
                                       textposition='outside'))
 
-fig_total_ebit_chart.update_layout(barmode='group', title='Total EBIT (Unit: Mil $)')
+fig_total_ebit_chart.update_layout(title='Total EBIT (Unit: Mil $)')
 fig_total_ebit_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
 fig_total_ebit_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
