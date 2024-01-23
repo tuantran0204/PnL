@@ -149,4 +149,9 @@ if show_financial_metrics:
     fig_profitability_column.update_layout(barmode='group', title='Profitability (Unit: Mil $)')
     fig_profitability_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
-st.plotly_chart(fig_profitability_column)
+try:
+        # Attempt to display the chart
+        st.plotly_chart(fig_profitability_column)
+    except Exception as e:
+        # Print the exception details
+        st.error(f"Error: {e}")
