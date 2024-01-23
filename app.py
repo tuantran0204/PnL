@@ -96,18 +96,6 @@ if 'data' in locals() and not data.empty:
     # Visualization
     st.subheader(' Metrics Visualization:')
 
-    def create_column_chart(fig, x, y, title):
-    # Add trace to the column chart with a different color
-    fig.add_trace(go.Bar(x=x, y=y,
-                             name=title,
-                             marker_color='#563D82',
-                             text=y.round(2),
-                             textposition='outside'))
-
-    fig.update_layout(title=title)
-    fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
-    fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
-
     # Corrected indentation for the next block
     st.subheader('Customer Base (Unit: Thousand Customers)')
     customer_base_data = {
@@ -119,6 +107,18 @@ if 'data' in locals() and not data.empty:
     '%Funding Rate': processed_data['Funding Rate'].round(2),
     'Funded Customer': processed_data['Funded Customer'].round(2)
     }
+
+    def create_column_chart(fig, x, y, title):
+    # Add trace to the column chart with a different color
+    fig.add_trace(go.Bar(x=x, y=y,
+                             name=title,
+                             marker_color='#563D82',
+                             text=y.round(2),
+                             textposition='outside'))
+
+    fig.update_layout(title=title)
+    fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     customer_base_table = pd.DataFrame(customer_base_data)
     st.table(customer_base_table)
