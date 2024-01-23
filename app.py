@@ -254,6 +254,6 @@ if show_ltv:
    
 st.subheader('Thank You')
 
-logo_url = "https://ictv.1cdn.vn/thumbs/600x315/2021/08/10/ictvietnam-mediacdn-vn-timo-1628512912128368312701-0-28-550-908-crop-16285129204861139492820.png"
+logo_url = "https://timo.vn/wp-content/uploads/141953291_3156718607762756_1861343105214615644_o-2.jpg"
 st.image(logo_url, use_column_width=False, width=800)
 
