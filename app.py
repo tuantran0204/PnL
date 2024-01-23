@@ -31,14 +31,14 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['payback'] = data['payback'].clip(lower=0)
 
     # Calculate New customer 2024-2028
-    for year in range(2024, 2029):
+    for i, year in enumerate(range(2024, 2029)):
         mask_cac = (data['Year'] == year)
-        data.loc[mask_cac, 'New Customer'] = sum(new_customer_increases2024[:year - 2024 + 1])
+        data.loc[mask_cac, 'New Customer'] = sum(new_customer_increases2024[:i+1])
 
     # Calculate Total customer 2024-2028
-    for year in range(2024, 2029):
+    for i, year in enumerate(range(2024, 2029)):
         mask_cac = (data['Year'] == year)
-        data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + sum(new_customer_increases2024[:year - 2024 + 1])
+        data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + sum(new_customer_increases2024[:i+1])
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
