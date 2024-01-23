@@ -150,7 +150,7 @@ if show_customer_metrics:
                                                text=processed_data['active_customer'].round(2),
                                                textposition='outside'))
     fig_customer_column.update_layout(barmode='group', title='Customer Base (Unit: Thousand)')
-    fig_customer_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
+    fig_customer_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
     fig_customer_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_customer_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
     st.plotly_chart(fig_customer_column)
@@ -177,7 +177,7 @@ if show_customer_metrics:
                                                           yaxis='y2'))  # Assign to secondary y-axis
 
     fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
-    fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
+    fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
     fig_customer_acquisition_column.update_layout(
         yaxis2=dict(overlaying='y', side='right', showgrid=False)
     )
@@ -288,7 +288,7 @@ if show_ltv:
                                                textposition='outside'))
 
     fig_funded_cac_ltv_column.update_layout(barmode='group', title='Funded CAC and LTV (Unit: USD)')
-    fig_funded_cac_ltv_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
+    fig_funded_cac_ltv_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
     fig_funded_cac_ltv_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_funded_cac_ltv_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
