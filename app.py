@@ -168,7 +168,7 @@ if show_financial_metrics:
                                         text=processed_data['EBIT Margin'].round(2),
                                         textposition='top left', textfont=dict(color='#7F7F7F')))
 
-    fig_margin_chart.update_layout(title='Gross Margin vs EBIT Margin (%)')
+    fig_margin_chart.update_layout(barmode='group', title='Gross Margin vs EBIT Margin (%)')
     fig_margin_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_margin_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
