@@ -107,7 +107,6 @@ if 'data' in locals() and not data.empty:
         fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     # Corrected indentation
-with st.sidebar.expander("Customer Base"):
     st.write('Unit: Thousand Customers')
     customer_base_data = {
         'Year': processed_data['Year'],
