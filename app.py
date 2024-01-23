@@ -91,8 +91,6 @@ if 'data' in locals() and not data.empty:
     # Visualization
     st.subheader(' Metrics Visualization:')
 
-    # ... (previous code)
-
     def create_column_chart(fig, x, y, title):
         # Add trace to the column chart with a different color
         fig.add_trace(go.Bar(x=x, y=y,
@@ -126,27 +124,28 @@ if 'data' in locals() and not data.empty:
     create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
     st.plotly_chart(fig_active_customer_chart)
 
-    # Create a table for Customer Base
-    st.subheader('Customer Base')
-    customer_base_data = {
-        'Year': processed_data['Year'],
-        'New Customers 2024': processed_data['New Customer'][processed_data['Year'] == 2024],
-        'New Customers 2025': processed_data['New Customer'][processed_data['Year'] == 2025],
-        'New Customers 2026': processed_data['New Customer'][processed_data['Year'] == 2026],
-        'New Customers 2027': processed_data['New Customer'][processed_data['Year'] == 2027],
-        'New Customers 2028': processed_data['New Customer'][processed_data['Year'] == 2028],
-        'Total Customers 2024': processed_data['Total Customer'][processed_data['Year'] == 2024],
-        'Total Customers 2025': processed_data['Total Customer'][processed_data['Year'] == 2025],
-        'Total Customers 2026': processed_data['Total Customer'][processed_data['Year'] == 2026],
-        'Total Customers 2027': processed_data['Total Customer'][processed_data['Year'] == 2027],
-        'Total Customers 2028': processed_data['Total Customer'][processed_data['Year'] == 2028],
-        'Active Rate': processed_data['Active Rate'],
-        'Active Customers': processed_data['active_customer'],
-        'Funding Rate': processed_data['Funding Rate'],
-        'Funded Customers': processed_data['Funded Customer']
-    }
 
-    customer_base_table = pd.DataFrame(customer_base_data)
-    st.table(customer_base_table)
+# Create a table for Customer Base
+st.subheader('Customer Base')
+customer_base_data = {
+    'Year': processed_data['Year'],
+    'New Customers 2024': processed_data['New Customer'][processed_data['Year'] == 2024],
+    'New Customers 2025': processed_data['New Customer'][processed_data['Year'] == 2025],
+    'New Customers 2026': processed_data['New Customer'][processed_data['Year'] == 2026],
+    'New Customers 2027': processed_data['New Customer'][processed_data['Year'] == 2027],
+    'New Customers 2028': processed_data['New Customer'][processed_data['Year'] == 2028],
+    'Total Customers 2024': processed_data['Total Customer'][processed_data['Year'] == 2024],
+    'Total Customers 2025': processed_data['Total Customer'][processed_data['Year'] == 2025],
+    'Total Customers 2026': processed_data['Total Customer'][processed_data['Year'] == 2026],
+    'Total Customers 2027': processed_data['Total Customer'][processed_data['Year'] == 2027],
+    'Total Customers 2028': processed_data['Total Customer'][processed_data['Year'] == 2028],
+    'Active Rate': processed_data['Active Rate'],
+    'Active Customers': processed_data['active_customer'],
+    'Funding Rate': processed_data['Funding Rate'],
+    # 'Funded Customers': processed_data['Funded Customer']  # Remove or replace this line
+}
 
-    st.title('Thank You')
+customer_base_table = pd.DataFrame(customer_base_data)
+st.table(customer_base_table)
+
+st.title('Thank You')
