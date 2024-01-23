@@ -55,14 +55,17 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['active_customer'] = data['Total Customer'] * (data['Active Rate']/100)
 
     # Calculate Revenue, GP/Active, total gross profit, LTV, LTV/CAC, Payback
+    
+    data['Funded Customer'] = (data['Total Customer'] * (data['Funding Rate']/100)).round(2)
+    
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
-    data['total_gross_profit'] = data['gp_per_active'] * data['active_customer']
+    data['Gross Profit'] = data['gp_per_active'] * data['active_customer'] / 1000
+
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
     data['payback'] = data['payback'].clip(lower=0)
-    data['Funded Customer'] = (data['Total Customer'] * (data['Funding Rate']/100)).round(2)
 
     return data
 
@@ -131,6 +134,10 @@ show_financial_metrics = st.checkbox("Financial Metrics")
 if show_financial_metrics:
     # Chart for Financial Metrics (Renamed from Revenue)
     st.subheader('Financial Metrics:')
-    fig_financial_metrics_chart = go.Figure()
-    create_column_chart(fig_financial_metrics_chart, processed_data['Year'], processed_data['revenue'], 'Revenue (Unit: Mil $)')
-    st.plotly_chart(fig_financial_metrics_chart)
+    fig_revenue_chart = go.Figure()
+    create_column_chart(fig_revenue_chart, processed_data['Year'], processed_data['revenue'], 'Revenue (Unit: Mil $)')
+    st.plotly_chart(fig_revenue_chart)
+
+    fig_gross_profit_chart = go.Figure()
+    create_column_chart(fig_gross_profit_chart, processed_data['Year'], processed_data['Gross Profit'], 'Gross Profit (Unit: Mil $)')
+    st.plotly_chart(fig_gross_profit_chart)
