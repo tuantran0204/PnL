@@ -107,7 +107,7 @@ if 'data' in locals() and not data.empty:
         fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     # Corrected indentation
-    st.subheader('Customer Base (Unit: Thousand Customers)')
+    st.write('Customer Base (Unit: Thousand Customers)')
     customer_base_data = {
         'Year': processed_data['Year'],
         'New Customers': processed_data['New Customer'].round(2),
