@@ -139,15 +139,15 @@ if show_customer_base_metrics:
 
     # Customer Base
     fig_customer_column = go.Figure()
-    fig_customer_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['active_customer'],
-                                               name='Active Customers',
-                                               marker_color='#A9A9A9',  # Set color to grey
-                                               text=processed_data['active_customer'].round(2),
-                                               textposition='outside'))
     fig_customer_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Total Customer'],
                                                name='Total Customers',
                                                marker_color='#563D82',  
                                                text=processed_data['Total Customer'].round(2),
+                                               textposition='outside'))
+    fig_customer_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['active_customer'],
+                                               name='Active Customers',
+                                               marker_color='#A9A9A9',  # Set color to grey
+                                               text=processed_data['active_customer'].round(2),
                                                textposition='outside'))
     fig_customer_column.update_layout(barmode='group', title='Customer Base (Unit: Thousand)')
     fig_customer_column.update_layout(legend=dict(traceorder='normal', y=1.02, x=0.5, orientation="h"))
@@ -157,15 +157,15 @@ if show_customer_base_metrics:
     
     # Customer Acquisition
     fig_customer_acquisition_column = go.Figure()
-    fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded Customer'],
-                                               name='New Funded Customers',
-                                               marker_color='#A9A9A9',  # Set color to grey
-                                               text=processed_data['Funded Customer'].round(2),
-                                               textposition='outside'))
     fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['New Customer'],
                                                name='New Customers',
                                                marker_color='#563D82',  
                                                text=processed_data['New Customer'].round(2),
+                                               textposition='outside'))
+    fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded Customer'],
+                                               name='New Funded Customers',
+                                               marker_color='#A9A9A9',  # Set color to grey
+                                               text=processed_data['Funded Customer'].round(2),
                                                textposition='outside'))
     fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
     fig_customer_acquisition_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
@@ -191,7 +191,7 @@ if show_financial_metrics:
                                                text=processed_data['Gross Profit'].round(2),
                                                textposition='outside'))
     fig_profitability_column.update_layout(barmode='group', title='Profitability (Unit: Mil $)')
-    
+    fig_profitability_column.update_layout(legend=dict(traceorder='normal', y=1.02, x=0.5, orientation="h"))
     fig_profitability_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
@@ -275,6 +275,7 @@ if show_ltv:
                                                textposition='outside'))
 
     fig_funded_cac_ltv_column.update_layout(barmode='group', title='Funded CAC and LTV (Unit: USD)')
+    fig_funded_cac_ltv_column.update_layout(legend=dict(traceorder='normal', y=1.02, x=0.5, orientation="h"))
     fig_funded_cac_ltv_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_funded_cac_ltv_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
