@@ -19,8 +19,8 @@ def calculate_metrics(data, funded_cac_increase, *new_customer_increases):
     data['inactive_customer'] = data['Total Customer'] - data['active_customer']
 
     # Apply Funded CAC increase only for the specified years (2024 to 2028)
-    mask = (data['Year'] >= 2024) & (data['Year'] <= 2028)
-    data.loc[mask, 'Funded CAC'] = (data.loc[mask, 'Funded CAC'] * 0) + funded_cac_increase
+    mask_cac = (data['Year'] >= 2024) & (data['Year'] <= 2028)
+    data.loc[mask_cac, 'Funded CAC'] = (data.loc[mask_cac, 'Funded CAC'] * 0) + funded_cac_increase
 
     # Calculate GP/Active, total gross profit, LTV, LTV/CAC, Payback
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
@@ -28,11 +28,12 @@ def calculate_metrics(data, funded_cac_increase, *new_customer_increases):
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
-    data['payback'] = data['payback'].clip(lower=0)\
+    data['payback'] = data['payback'].clip(lower=0)
 
-    # Apply Funded CAC increase only for the specified years (2024 to 2028)
-    mask = (data['Year'] >= 2024) & (data['Year'] <= 2028)
-    data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increases
+    # Apply New Customer increases only for the specified years (2024 to 2028)
+    for year, new_customer_increase_value in zip(range(2024, 2029), new_customer_increases):
+        mask_new_customer = (data['Year'] == year)
+        data.loc[mask_new_customer, 'New Customer'] = (data.loc[mask_new_customer, 'New Customer'] * 0) + new_customer_increase_value
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
@@ -53,7 +54,7 @@ data = pd.read_csv("./data.csv")
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
-    new_customer_increases = [st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=400) for year in range(2024, 2029)]
+    new_customer_increases = st.sidebar.multiselect('New Customer Increases (Unit: Thousand)', [400, 400, 500, 600, 750], [400, 400, 500, 600, 750])
     funded_cac_increase = st.sidebar.number_input('Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
 
     # Process and calculate additional metrics with user input values
