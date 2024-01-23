@@ -175,7 +175,7 @@ if show_financial_metrics:
     st.plotly_chart(fig_margin_chart)
 
     fig_test_chart = go.Figure()
-    create_column_chart(fig_test_chart, processed_data['Year'], processed_data['Retaining'], 'Active Customers (Unit: Thousand)')
+    create_column_chart(fig_test_chart, processed_data['Year'], processed_data['Opex'], 'Opex (Unit: Thousand)')
     st.plotly_chart(fig_test_chart)
 
 st.subheader('Thank You')
