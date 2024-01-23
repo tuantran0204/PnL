@@ -22,10 +22,10 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data.loc[mask_cac, 'Funded CAC'] = (data.loc[mask_cac, 'Funded CAC'] * 0) + funded_cac_increase
 
     mask_cac = (data['Year'] >= 2024) & (data['Year'] <= 2028)
-    data.loc[mask_cac, 'Active Rate'] = (data.loc[mask_cac, 'Active Rate'] * 0) + active_rate/100
+    data.loc[mask_cac, 'Active Rate'] = (data.loc[mask_cac, 'Active Rate'] * 0) + active_rate
 
     mask_cac = (data['Year'] >= 2024) & (data['Year'] <= 2028)
-    data.loc[mask_cac, 'Funding Rate'] = (data.loc[mask_cac, 'Funding Rate'] * 0) + funding_rate/100
+    data.loc[mask_cac, 'Funding Rate'] = (data.loc[mask_cac, 'Funding Rate'] * 0) + funding_rate
 
     # Calculate New customer 2024-2028
     mask_cac = (data['Year'] == 2024)
