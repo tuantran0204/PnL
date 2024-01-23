@@ -177,7 +177,7 @@ if show_customer_metrics:
                                                           yaxis='y2'))  # Assign to secondary y-axis
 
     fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
-    fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
+    fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.25, orientation="h"))
     fig_customer_acquisition_column.update_layout(
         yaxis2=dict(overlaying='y', side='right', showgrid=False)
     )
