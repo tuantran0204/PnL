@@ -44,7 +44,7 @@ def calculate_metrics(data, funded_cac_increase):
     data['new_customer'] = data['New Customer']
 
     # Calculate New Customer
-    data['revenue'] = data['ARPU'] * data['active_customer']
+    data['revenue'] = data['ARPU'] * data['active_customer'] / 1000000
 
     return data
 
@@ -78,7 +78,7 @@ if 'data' in locals() and not data.empty:
     fig_revenue_chart = go.Figure()
 
     # Add Revenue to the column chart with a different color
-    fig_revenue_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['revenue']/10^6,
+    fig_revenue_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['revenue'],
                                       name='Revenue',
                                       marker_color='#563D82',  
                                       text=processed_data['revenue'].round(2),
