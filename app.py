@@ -61,7 +61,7 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increase_2024, new
     data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increase_2028
     
     # Calculate Revenue
-    data['revenue'] = data['ARPU'] * data['active_customer'] / 1000000
+    data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
 
     return data
 
@@ -79,12 +79,11 @@ data = pd.read_csv("./data.csv")
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
-    funded_cac_increase = st.sidebar.number_input('Funded CAC Input 2024-2028 (Unit: $)', min_value=5, max_value=30, step=1, value=10)
-    new_customer_increase_2024 = st.sidebar.number_input('New Customer 2024 (thousand)', min_value=100, max_value=3000, step=1, value=400)
-    new_customer_increase_2025 = st.sidebar.number_input('New Customer 2025 (thousand)', min_value=100, max_value=3000, step=1, value=400)
-    new_customer_increase_2026 = st.sidebar.number_input('New Customer 2026 (thousand)', min_value=100, max_value=3000, step=1, value=500)
-    new_customer_increase_2027 = st.sidebar.number_input('New Customer 2027 (thousand)', min_value=100, max_value=3000, step=1, value=600)
-    new_customer_increase_2028 = st.sidebar.number_input('New Customer 2028 (thousand)', min_value=100, max_value=3000, step=1, value=700)
+    new_customer_increase_2024 = st.sidebar.number_input('New Customer 2024 (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=400)
+    new_customer_increase_2025 = st.sidebar.number_input('New Customer 2025 (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=400)
+    new_customer_increase_2026 = st.sidebar.number_input('New Customer 2026 (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=500)
+    new_customer_increase_2027 = st.sidebar.number_input('New Customer 2027 (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=600)
+    new_customer_increase_2028 = st.sidebar.number_input('New Customer 2028 (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=700)
 
     # Process and calculate additional metrics with user input values
     processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increase_2024, new_customer_increase_2025, new_customer_increase_2026, new_customer_increase_2027, new_customer_increase_2028)
@@ -123,12 +122,26 @@ if 'data' in locals() and not data.empty:
                                       text=processed_data['New Customer'].round(2),
                                       textposition='outside'))
     
-    fig_new_customer_chart.update_layout(title='New Customer')
+    fig_new_customer_chart.update_layout(title='New Customers (Unit: Thousand)')
 
     fig_new_customer_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_new_customer_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_new_customer_chart)
+
+     # Add total Customer to the column chart with a different color
+    fig_total_customer_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Total Customer'],
+                                      name='Total Customer',
+                                      marker_color='#563D82',  
+                                      text=processed_data['Total Customer'].round(2),
+                                      textposition='outside'))
+    
+    fig_total_customer_chart.update_layout(title='Total Customers (Unit: Thousand)')
+
+    fig_total_customer_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_total_customer_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_total_customer_chart)
 
 
     
