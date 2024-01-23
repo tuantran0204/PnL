@@ -255,5 +255,5 @@ if show_ltv:
 st.subheader('Thank You')
 
 logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
-st.image(logo_url, use_column_width=False, width=500)
+st.image(logo_url, use_column_width=False, width=400)
 
