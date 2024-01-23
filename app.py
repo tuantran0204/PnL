@@ -59,6 +59,10 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increase_2024, new
     # Calculate New Customer 2028
     mask = (data['Year'] == 2028)
     data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increase_2028
+
+    # Calculate Total Customer 2024
+    mask = (data['Year'] == 2024)
+    data.loc[mask, 'Total Customer'] = (data.loc[mask, 'Total Customer'] * 0) + new_customer_increase_2024
     
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
