@@ -108,7 +108,7 @@ if 'data' in locals() and not data.empty:
 
     # Corrected indentation
     with st.sidebar.expander("Customer Base"):
-    st.write('Unit: Thousand Customers)
+    st.write('Unit: Thousand Customers')
     customer_base_data = {
         'Year': processed_data['Year'],
         'New Customers': processed_data['New Customer'].round(2),
