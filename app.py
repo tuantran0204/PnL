@@ -129,7 +129,7 @@ if 'data' in locals() and not data.empty:
     create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
     st.plotly_chart(fig_active_customer_chart)
 
-    st.subheader('Customer Base (Unit: Thousand Customer)')
+   st.subheader('Customer Base (Unit: Thousand Customer)')
     customer_base_data = {
         'Year': processed_data['Year'],
         'New Customers': processed_data['New Customer'].round(0),
@@ -140,5 +140,5 @@ if 'data' in locals() and not data.empty:
         'Funded Customer': processed_data['Funded Customer'].round(0)
     }
 
-customer_base_table = pd.DataFrame(index=processed_data['Year'], customer_base_data)
+customer_base_table = pd.DataFrame(index=processed_data['Year'])
 st.table(customer_base_table)
