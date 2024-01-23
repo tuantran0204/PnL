@@ -31,14 +31,28 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['payback'] = data['payback'].clip(lower=0)
 
     # Calculate New customer 2024-2028
-    for i, year in enumerate(range(2024, 2029)):
-        mask_cac = (data['Year'] == year)
-        data.loc[mask_cac, 'New Customer'] = new_customer_increases2024[i]
-
+    mask_cac = (data['Year'] == 2024)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024
+    mask_cac = (data['Year'] == 2025)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024+ new_customer_increases2025
+    mask_cac = (data['Year'] == 2026)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026
+    mask_cac = (data['Year'] == 2027)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
+    mask_cac = (data['Year'] == 2028)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
+        
     # Calculate Total customer 2024-2028
-    for i, year in enumerate(range(2024, 2029)):
-        mask_cac = (data['Year'] == year)
-        data.loc[mask_cac, 'Total Customer'] = data.loc[mask_cac, 'Total Customer'] + new_customer_increases2024[i]
+    mask_cac = (data['Year'] == 2024)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024
+    mask_cac = (data['Year'] == 2025)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024+ new_customer_increases2025
+    mask_cac = (data['Year'] == 2026)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026
+    mask_cac = (data['Year'] == 2027)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
+    mask_cac = (data['Year'] == 2028)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
