@@ -133,11 +133,26 @@ if show_customer_base_metrics:
 show_financial_metrics = st.checkbox("Financial Metrics")
 if show_financial_metrics:
     # Chart for Financial Metrics (Renamed from Revenue)
-    st.subheader('Financial Metrics:')
-    fig_revenue_chart = go.Figure()
-    create_column_chart(fig_revenue_chart, processed_data['Year'], processed_data['revenue'], 'Revenue (Unit: Mil $)')
-    st.plotly_chart(fig_revenue_chart)
 
-    fig_gross_profit_chart = go.Figure()
-    create_column_chart(fig_gross_profit_chart, processed_data['Year'], processed_data['Gross Profit'], 'Gross Profit (Unit: Mil $)')
-    st.plotly_chart(fig_gross_profit_chart)
+    # Column chart for Revenue vs GP by year
+    fig_profitability_column = go.Figure()
+
+    # Add revenue 
+    fig_profitability_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Gross Profit'],
+                                               name='Gross Profit',
+                                               marker_color='#A9A9A9',  # Set color to grey
+                                               text=processed_data['Gross Profit'].round(2),
+                                               textposition='outside'))
+
+    # Add GP
+    fig_profitability_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['revenue'],
+                                               name='revenue',
+                                               marker_color='#2774AE',  
+                                               text=processed_data['revenue'].round(2),
+                                               textposition='outside'))
+
+    fig_profitability_column.update_layout(barmode='group', title='Profitability (Unit: Mil $)')
+    fig_profitability_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    
