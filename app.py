@@ -84,6 +84,9 @@ def create_column_chart(fig, x, y, title):
     fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
+logo_url = "https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-timo-V.png"
+st.image(logo_url, use_column_width=False, width=150, caption="Timo Digital Bank")
+
 # Title of the app
 st.title('Timo Digital Bank')
 
