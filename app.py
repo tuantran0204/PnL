@@ -192,5 +192,64 @@ if show_financial_metrics:
 
     st.plotly_chart(fig_margin_chart)
 
+# Checkbox to toggle Life Time Value
+show_ltv = st.checkbox("Life Time Value")
+if show_ltv:
+    # Column chart for Payback by year
+    fig_payback_chart = go.Figure()
+
+    # Add Payback to the column chart with a different color
+    fig_payback_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['payback'],
+                                       name='Payback',
+                                       marker_color='#563D82',  # Set color to grey
+                                       text=processed_data['payback'].round(2),
+                                       textposition='outside'))
+
+    fig_payback_chart.update_layout(title='Payback (Unit: Year)')
+
+    fig_payback_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_payback_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_payback_chart)
+
+    # Column chart for Funded CAC and LTV by year
+    fig_funded_cac_ltv_column = go.Figure()
+
+    # Add Funded CAC to the column chart with a different color
+    fig_funded_cac_ltv_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded CAC'],
+                                               name='Funded CAC',
+                                               marker_color='#A9A9A9',  # Set color to grey
+                                               text=processed_data['Funded CAC'].round(2),
+                                               textposition='outside'))
+
+    # Add LTV to the column chart with blue color
+    fig_funded_cac_ltv_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['ltv'],
+                                               name='LTV',
+                                               marker_color='#2774AE',  # Set color to blue
+                                               text=processed_data['ltv'].round(2),
+                                               textposition='outside'))
+
+    fig_funded_cac_ltv_column.update_layout(barmode='group', title='Funded CAC and LTV (Unit: USD)')
+    fig_funded_cac_ltv_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_funded_cac_ltv_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_funded_cac_ltv_column)
+
+    # Column chart for LTV/CAC by year
+    fig_line_chart = go.Figure()
+
+    # Add LTV/CAC to the line chart with red color
+    fig_line_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['ltv_cac_ratio'],
+                                        mode='lines+text', name='LTV/CAC Ratio', line=dict(color='#EB3300'),
+                                        text=processed_data['ltv_cac_ratio'].round(2),
+                                        textposition='top left', textfont=dict(color='#7F7F7F')))
+
+    fig_line_chart.update_layout(title='LTV/Funded CAC Ratio')
+    fig_line_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_line_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_line_chart)
+
+   
 st.subheader('Thank You')
 
