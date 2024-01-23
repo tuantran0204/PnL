@@ -130,14 +130,14 @@ if 'data' in locals() and not data.empty:
     st.plotly_chart(fig_active_customer_chart)
 
     st.subheader('Customer Base (Unit: Thousand Customer)')
-customer_base_data = {
-    'New Customers': processed_data['New Customer'].round(0),
-    'Total Customers': processed_data['Total Customer'].round(0),
-    '% Active Rate': processed_data['Active Rate'].round(2),
-    'Active Customers': processed_data['active_customer'].round(0),
-    '% Funding Rate': processed_data['Funding Rate'].round(2),
-    'Funded Customer': processed_data['Funded Customer'].round(0)
-}
+    customer_base_data = {
+        'New Customers': processed_data['New Customer'].round(0),
+        'Total Customers': processed_data['Total Customer'].round(0),
+        '% Active Rate': processed_data['Active Rate'].round(2),
+        'Active Customers': processed_data['active_customer'].round(0),
+        '% Funding Rate': processed_data['Funding Rate'].round(2),
+        'Funded Customer': processed_data['Funded Customer'].round(0)
+    }
 
-customer_base_table = pd.DataFrame(index=processed_data['Year'], customer_base_data)
+customer_base_table = pd.DataFrame(customer_base_data, index=processed_data['Year'])
 st.table(customer_base_table)
