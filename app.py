@@ -85,7 +85,7 @@ def create_column_chart(fig, x, y, title):
     fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
 # Title of the app
-st.title('PnL Simulator')
+st.title('Timo Digital Bank')
 
 # Create a sidebar for input
 st.sidebar.title("Input Settings")
@@ -112,10 +112,7 @@ if 'data' in locals() and not data.empty:
     # Process and calculate additional metrics with user input values
     processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new_customer_increases2025, new_customer_increases2026, new_customer_increases2027, new_customer_increases2028, active_rate, funding_rate)
 
-    st.subheader(' Definition:')
-    # Additional insights
-    st.write("Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
-
+    st.subheader(' Pross & Loss Simulator')
 # Visualization
 st.subheader(' Metrics Visualization:')
 
