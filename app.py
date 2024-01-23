@@ -92,17 +92,17 @@ if 'data' in locals() and not data.empty:
     st.subheader(' Metrics Visualization:')
 
     def create_column_chart(fig, x, y, title):
-        # Add trace to the column chart with a different color
-        fig.add_trace(go.Bar(x=x, y=y,
-                             name=title,
-                             marker_color='#563D82',
-                             text=y.round(2),
-                             textposition='outside'))
+    # Add trace to the column chart with a different color
+    fig.add_trace(go.Bar(x=x, y=y,
+                         name=title,
+                         marker_color='#563D82',
+                         text=y.round(2),
+                         textposition='outside'))
 
-        fig.update_layout(title=title)
+    fig.update_layout(title=title)
 
-        fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
-        fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+    fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     # Column chart for Revenue by year
     fig_revenue_chart = go.Figure()
@@ -146,6 +146,5 @@ customer_base_data = {
 
 customer_base_table = pd.DataFrame(customer_base_data)
 st.table(customer_base_table)
-
 
     st.title('Thank You')
