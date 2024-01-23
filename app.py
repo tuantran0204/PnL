@@ -131,6 +131,7 @@ if 'data' in locals() and not data.empty:
 
     st.subheader('Customer Base (Unit: Thousand Customer)')
     customer_base_data = {
+        'Year': processed_data['Year'],
         'New Customers': processed_data['New Customer'].round(0),
         'Total Customers': processed_data['Total Customer'].round(0),
         '% Active Rate': processed_data['Active Rate'].round(2),
@@ -139,5 +140,5 @@ if 'data' in locals() and not data.empty:
         'Funded Customer': processed_data['Funded Customer'].round(0)
     }
 
-customer_base_table = pd.DataFrame(customer_base_data, index=processed_data['Year'])
+customer_base_table = pd.DataFrame(index=processed_data['Year'], customer_base_data)
 st.table(customer_base_table)
