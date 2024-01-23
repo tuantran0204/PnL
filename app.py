@@ -33,17 +33,19 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     # Calculate New customer 2024-2028
     for i, year in enumerate(range(2024, 2029)):
         mask_cac = (data['Year'] == year)
-        data.loc[mask_cac, 'New Customer'] = sum(new_customer_increases2024[:i+1])
+        data.loc[mask_cac, 'New Customer'] = new_customer_increases2024[i]
 
     # Calculate Total customer 2024-2028
     for i, year in enumerate(range(2024, 2029)):
         mask_cac = (data['Year'] == year)
-        data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + sum(new_customer_increases2024[:i+1])
+        data.loc[mask_cac, 'Total Customer'] = data.loc[mask_cac, 'Total Customer'] + new_customer_increases2024[i]
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
 
     return data
+
+
 
 # Title of the app
 st.title('PnL Simulator')
