@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Function to calculate additional metrics
-def calculate_metrics(data, funded_cac_increase, *new_customer_increases):
+def calculate_metrics(data, funded_cac_increase, new_customer_increases):
     # Assuming 'Year', 'Total Customer', 'Active Rate', 'New Customer', 'Funding Rate',
     # 'ARPU', 'Direct Cost', 'Churn Rate', 'Funded CAC' are columns in your data
 
@@ -30,8 +30,8 @@ def calculate_metrics(data, funded_cac_increase, *new_customer_increases):
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
     data['payback'] = data['payback'].clip(lower=0)
 
-    # Apply New Customer increases only for the specified years (2024 to 2028)
-    for year, new_customer_increase_value in zip(range(2024, 2029), new_customer_increases):
+    # Apply New Customer increases for each year
+    for year, new_customer_increase_value in new_customer_increases.items():
         mask_new_customer = (data['Year'] == year)
         data.loc[mask_new_customer, 'New Customer'] = (data.loc[mask_new_customer, 'New Customer'] * 0) + new_customer_increase_value
 
@@ -54,11 +54,13 @@ data = pd.read_csv("./data.csv")
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
-    new_customer_increases = st.sidebar.multiselect('New Customer Increases (Unit: Thousand)', [100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000], [400, 400, 500, 600, 700])
+    new_customer_increases = {}
+    for year in range(2024, 2029):
+        new_customer_increases[year] = st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=400)
     funded_cac_increase = st.sidebar.number_input('Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
 
     # Process and calculate additional metrics with user input values
-    processed_data = calculate_metrics(data, funded_cac_increase, *new_customer_increases)
+    processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increases)
 
     st.subheader(' Definition:')
     # Additional insights
