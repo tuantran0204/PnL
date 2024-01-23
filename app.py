@@ -124,7 +124,7 @@ if 'data' in locals() and not data.empty:
     st.sidebar.subheader("PnL Input 2024-2028 (Unit: $)")
 
     # Input for Funded CAC increase from 5 to 30
-    funded_cac_increase = st.sidebar.number_input('Funded CAC', min_vale=3, max_value=50, step=1, value=10)
+    funded_cac_increase = st.sidebar.number_input('Funded CAC', min_value=3, max_value=50, step=1, value=10)
 
     new_customer_increases = [new_customer_increases2024, new_customer_increases2025, new_customer_increases2026, new_customer_increases2027, new_customer_increases2028]
 
