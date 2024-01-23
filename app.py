@@ -159,11 +159,11 @@ if show_financial_metrics:
     fig_margin_chart = go.Figure()
 
     # Add GM, EBIT margin 
-    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Gross Margin'],
+    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Gross Margin'] * 100,
                                         mode='lines+text', name='Gross Margin', line=dict(color='#EB3300'),
                                         text=processed_data['Gross Margin'].round(2),
                                         textposition='top left', textfont=dict(color='#A9A9A9')))
-    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['EBIT Margin'],
+    fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['EBIT Margin'] * 100,
                                         mode='lines+text', name='EBIT Margin', line=dict(color='#EB3300'),
                                         text=processed_data['EBIT Margin'].round(2),
                                         textposition='top left', textfont=dict(color='#7F7F7F')))
