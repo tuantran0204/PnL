@@ -174,6 +174,9 @@ if show_financial_metrics:
 
     st.plotly_chart(fig_margin_chart)
 
+    # Column EBIT
+    fig_total_ebit_chart = go.Figure()
+
 
     # Add total EBIT 
     fig_total_ebit_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['EBIT'],
