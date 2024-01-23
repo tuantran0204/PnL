@@ -32,11 +32,14 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increase_2024, new
 
     # Calculate New Customer and Total Customer for each year
     for year in range(2024, 2029):
-        mask = (data['Year'] == year)
         new_customer_column = f'New Customer {year}'
         total_customer_column = f'Total Customer {year}'
 
-        data.loc[mask, new_customer_column] = (data.loc[mask, new_customer_column] * 0) + globals()[f'new_customer_increase_{year}']
+        # Assuming you have declared these variables somewhere
+        new_customer_increase_value = globals()[f'new_customer_increase_{year}']
+
+        mask = (data['Year'] == year)
+        data.loc[mask, new_customer_column] = (data.loc[mask, new_customer_column] * 0) + new_customer_increase_value
 
         data.loc[mask, total_customer_column] = data.loc[mask, 'Total Customer'] + data.loc[mask, new_customer_column]
 
