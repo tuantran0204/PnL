@@ -77,11 +77,11 @@ if 'data' in locals() and not data.empty:
     # Column chart for Revenue by year
     fig_revenue_chart = go.Figure()
 
-    # Add Payback to the column chart with a different color
+    # Add Revenue to the column chart with a different color
     fig_revenue_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['revenue'],
-                                      name='Payback',
+                                      name='Revenue',
                                       marker_color='#563D82',  
-                                      text=processed_data['payback'].round(2),
+                                      text=processed_data['revenue'].round(2),
                                       textposition='outside'))
     
     fig_revenue_chart.update_layout(title='Revenue (Unit: USD)')
