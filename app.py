@@ -160,13 +160,13 @@ if show_financial_metrics:
 
     # Add GM, EBIT margin 
     fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['Gross Margin'],
-                                        mode='lines+text', name='Gross Margin', line=dict(color='#EB3300'),
+                                        mode='lines+text', name='Gross Margin', line=dict(color='#2774AE'),
                                         text=processed_data['Gross Margin'].round(2),
                                         textposition='top left', textfont=dict(color='#2774AE')))
     fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['EBIT Margin'],
                                         mode='lines+text', name='EBIT Margin', line=dict(color='#EB3300'),
                                         text=processed_data['EBIT Margin'].round(2),
-                                        textposition='bottom left', textfont=dict(color='#7F7F7F')))
+                                        textposition='bottom left', textfont=dict(color='#EB3300')))
 
     fig_margin_chart.update_layout(barmode='group', title='Gross Margin vs EBIT Margin (%)')
     fig_margin_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
