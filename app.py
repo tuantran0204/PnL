@@ -89,7 +89,7 @@ if 'data' in locals() and not data.empty:
     fig_revenue_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_revenue_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
-    st.plotly_chart(fig_payback_chart)
+    st.plotly_chart(fig_revenue_chart)
 
     # Column chart for Funded CAC and LTV by year
     fig_funded_cac_ltv_column = go.Figure()
