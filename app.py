@@ -195,7 +195,7 @@ if show_financial_metrics:
 # Checkbox to toggle Life Time Value
 show_ltv = st.checkbox("Life Time Value")
 if show_ltv: 
-    st.subheader(' Definition:')
+    st.write(' Definition:')
     # Additional insights
     st.write("Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
     # Column chart for Payback by year
@@ -245,7 +245,7 @@ if show_ltv:
     fig_line_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['ltv_cac_ratio'],
                                         mode='lines+text', name='LTV/CAC Ratio', line=dict(color='#EB3300'),
                                         text=processed_data['ltv_cac_ratio'].round(2),
-                                        textposition='top left', textfont=dict(color='#7F7F7F')))
+                                        textposition='top left', textfont=dict(color='#EB3300')))
 
     fig_line_chart.update_layout(title='LTV/Funded CAC Ratio')
     fig_line_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
