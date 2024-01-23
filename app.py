@@ -90,23 +90,12 @@ if 'data' in locals() and not data.empty:
     # Additional insights
     st.write("Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
 
-    # Visualization
-    st.subheader(' Metrics Visualization:')
+# Visualization
+st.subheader(' Metrics Visualization:')
 
-    def create_column_chart(fig, x, y, title):
-        # Add trace to the column chart with a different color
-        fig.add_trace(go.Bar(x=x, y=y,
-                             name=title,
-                             marker_color='#563D82',
-                             text=y.round(2),
-                             textposition='outside'))
-
-        fig.update_layout(title=title)
-        fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
-        fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
-
-    # List down the charts vertically
-    st.subheader('Customer Base Metrics:')
+# Checkbox to toggle Customer Base Metrics
+show_customer_base_metrics = st.checkbox("Customer Base Metrics")
+if show_customer_base_metrics:
     # Column chart for New Customer by year
     fig_new_customer_chart = go.Figure()
     create_column_chart(fig_new_customer_chart, processed_data['Year'], processed_data['New Customer'], 'New Customers (Unit: Thousand)')
@@ -120,8 +109,11 @@ if 'data' in locals() and not data.empty:
     # Column chart for Active Customer by year
     fig_active_customer_chart = go.Figure()
     create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
-    st.plotly_chart(fig_active_customer_chart) 
+    st.plotly_chart(fig_active_customer_chart)
 
+# Checkbox to toggle Financial Metrics
+show_financial_metrics = st.checkbox("Financial Metrics")
+if show_financial_metrics:
     # Chart for Financial Metrics (Renamed from Revenue)
     st.subheader('Financial Metrics:')
     fig_financial_metrics_chart = go.Figure()
