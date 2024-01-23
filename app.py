@@ -14,72 +14,32 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increase_2024, new
     data['Total Customer'] = pd.to_numeric(data['Total Customer'], errors='coerce')
     data['Active Rate'] = pd.to_numeric(data['Active Rate'], errors='coerce')
 
-    # Calculate active customer
+    # Calculate active customer and inactive customer for all years
     data['active_customer'] = data['Total Customer'] * data['Active Rate']
-
-    # Calculate inactive customer
     data['inactive_customer'] = data['Total Customer'] - data['active_customer']
 
     # Apply Funded CAC increase only for the specified years (2024 to 2028)
     mask = (data['Year'] >= 2024) & (data['Year'] <= 2028)
     data.loc[mask, 'Funded CAC'] = (data.loc[mask, 'Funded CAC'] * 0) + funded_cac_increase
 
-    # Calculate GP/Active
+    # Calculate GP/Active, total gross profit, LTV, LTV/CAC, Payback
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
-
-    # Calculate total gross profit
     data['total_gross_profit'] = data['gp_per_active'] * data['active_customer']
-
-    # Calculate LTV
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
-
-    # Calculate LTV/CAC
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
-
-    # Calculate Payback
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
-    data['payback'] = data['payback'].clip(lower=0)  # Set Payback to 0 if less than 0
+    data['payback'] = data['payback'].clip(lower=0)
 
-    # Calculate New Customer 2024
-    mask = (data['Year'] == 2024)
-    data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increase_2024
+    # Calculate New Customer and Total Customer for each year
+    for year in range(2024, 2029):
+        mask = (data['Year'] == year)
+        new_customer_column = f'New Customer {year}'
+        total_customer_column = f'Total Customer {year}'
 
-    # Calculate New Customer 2025
-    mask = (data['Year'] == 2025)
-    data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increase_2025
+        data.loc[mask, new_customer_column] = (data.loc[mask, new_customer_column] * 0) + globals()[f'new_customer_increase_{year}']
 
-    # Calculate New Customer 2026
-    mask = (data['Year'] == 2026)
-    data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increase_2026
+        data.loc[mask, total_customer_column] = data.loc[mask, 'Total Customer'] + data.loc[mask, new_customer_column]
 
-    # Calculate New Customer 2027
-    mask = (data['Year'] == 2027)
-    data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increase_2027
-
-    # Calculate New Customer 2028
-    mask = (data['Year'] == 2028)
-    data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increase_2028
-
-    # Calculate Total Customer 2024
-    mask = (data['Year'] == 2024)
-    data.loc[mask, 'Total Customer'] = (data.loc[mask, 'Total Customer']) + new_customer_increase_2024
-
-    # Calculate Total Customer 2025
-    mask = (data['Year'] == 2025)
-    data.loc[mask, 'Total Customer'] = (data.loc[mask, 'Total Customer']) + new_customer_increase_2024 + new_customer_increase_2025
-
-    # Calculate Total Customer 2026
-    mask = (data['Year'] == 2026)
-    data.loc[mask, 'Total Customer'] = (data.loc[mask, 'Total Customer']) + new_customer_increase_2024 + new_customer_increase_2025 + new_customer_increase_2026
-
-    # Calculate Total Customer 2027
-    mask = (data['Year'] == 2027)
-    data.loc[mask, 'Total Customer'] = (data.loc[mask, 'Total Customer']) + new_customer_increase_2024 + new_customer_increase_2025 + new_customer_increase_2026 + new_customer_increase_2027
-
-    # Calculate Total Customer 2028
-    mask = (data['Year'] == 2028)
-    data.loc[mask, 'Total Customer'] = (data.loc[mask, 'Total Customer']) + new_customer_increase_2024 + new_customer_increase_2025 + new_customer_increase_2026 + new_customer_increase_2027 + new_customer_increase_2028
-    
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
 
@@ -172,7 +132,7 @@ if 'data' in locals() and not data.empty:
 
      # Add total Customer to the column chart with a different color
     fig_active_customer_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['active_customer'],
-                                      name='active_customer',
+                                      name='Active Customers',
                                       marker_color='#563D82',  
                                       text=processed_data['active_customer'].round(2),
                                       textposition='outside'))
@@ -184,6 +144,4 @@ if 'data' in locals() and not data.empty:
 
     st.plotly_chart(fig_active_customer_chart)
 
-
-    
     st.title('Thank You')
