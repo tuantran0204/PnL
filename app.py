@@ -174,8 +174,16 @@ if show_financial_metrics:
 
     st.plotly_chart(fig_margin_chart)
 
-    fig_EBIT_chart = go.Figure()
-    create_column_chart(fig_EBIT_chart, processed_data['Year'], processed_data['EBIT'], 'Total EBIT (Unit: Mil $)')
+
+    # Add total EBIT 
+    fig_EBIT_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['EBIT'],
+                                               name='EBIT',
+                                               marker_color='#2774AE',  
+                                               text=processed_data['EBIT'].round(2),
+                                               textposition='outside'))
+    fig_EBIT_chart.update_layout(barmode='group', title='Total EBIT (Unit: Mil $)')
+    fig_EBIT_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_EBIT_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
     st.plotly_chart(fig_EBIT_chart)
 
 st.subheader('Thank You')
