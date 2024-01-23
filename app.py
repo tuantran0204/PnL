@@ -54,7 +54,7 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
 
     # Calculate Revenue, GP/Active, total gross profit, LTV, LTV/CAC, Payback
     
-    data['Funded Customer'] = data['Total Customer'] * (data['Active Rate']/100) * (data['Funding Rate']/100)
+    data['Funded Customer'] = data['active_customer'] * (data['Funding Rate']/100)
     
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
