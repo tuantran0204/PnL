@@ -75,7 +75,7 @@ if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
     new_customer_increases = {}
     for year in range(2024, 2029):
-    funded_cac_increase = st.sidebar.number_input(f'Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
+    funded_cac_increase = st.sidebar.number_input('Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
     new_customer_increases2024 = st.sidebar.number_input(f'New Customer 2024 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 400)
     new_customer_increases2025 = st.sidebar.number_input(f'New Customer 2025 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 400)
     new_customer_increases2026 = st.sidebar.number_input(f'New Customer 2026 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 500)
