@@ -28,8 +28,11 @@ def calculate_metrics(data, funded_cac_increase, *new_customer_increases):
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
-    data['payback'] = data['payback'].clip(lower=0)
+    data['payback'] = data['payback'].clip(lower=0)\
 
+    # Apply Funded CAC increase only for the specified years (2024 to 2028)
+    mask = (data['Year'] >= 2024) & (data['Year'] <= 2028)
+    data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increases
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
