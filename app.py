@@ -96,6 +96,17 @@ st.subheader(' Metrics Visualization:')
 # Checkbox to toggle Customer Base Metrics
 show_customer_base_metrics = st.checkbox("Customer Base Metrics")
 if show_customer_base_metrics:
+    def create_column_chart(fig, x, y, title):
+    # Add trace to the column chart with a different color
+    fig.add_trace(go.Bar(x=x, y=y,
+                         name=title,
+                         marker_color='#563D82',
+                         text=y.round(2),
+                         textposition='outside'))
+
+    fig.update_layout(title=title)
+    fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
     # Column chart for New Customer by year
     fig_new_customer_chart = go.Figure()
     try:
@@ -119,6 +130,17 @@ show_financial_metrics = st.checkbox("Financial Metrics")
 if show_financial_metrics:
     # Chart for Financial Metrics (Renamed from Revenue)
     st.subheader('Financial Metrics:')
+    def create_column_chart(fig, x, y, title):
+    # Add trace to the column chart with a different color
+    fig.add_trace(go.Bar(x=x, y=y,
+                         name=title,
+                         marker_color='#563D82',
+                         text=y.round(2),
+                         textposition='outside'))
+
+    fig.update_layout(title=title)
+    fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
     fig_financial_metrics_chart = go.Figure()
     create_column_chart(fig_financial_metrics_chart, processed_data['Year'], processed_data['revenue'], 'Revenue (Unit: Mil $)')
     st.plotly_chart(fig_financial_metrics_chart)
