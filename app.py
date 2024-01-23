@@ -150,7 +150,7 @@ if show_customer_base_metrics:
                                                text=processed_data['active_customer'].round(2),
                                                textposition='outside'))
     fig_customer_column.update_layout(barmode='group', title='Customer Base (Unit: Thousand)')
-    fig_customer_column.update_layout(legend=dict(traceorder='normal', y=1.02, x=0.5, orientation="h"))
+    fig_customer_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
     fig_customer_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_customer_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
     st.plotly_chart(fig_customer_column)
@@ -170,7 +170,7 @@ if show_customer_base_metrics:
     fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
     fig_customer_acquisition_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_customer_acquisition_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
-    fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=1.02, x=0.5, orientation="h"))
+    fig_customer_acquisition_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
     st.plotly_chart(fig_customer_acquisition_column)
     
 # Checkbox to toggle Financial Metrics
@@ -191,7 +191,7 @@ if show_financial_metrics:
                                                text=processed_data['Gross Profit'].round(2),
                                                textposition='outside'))
     fig_profitability_column.update_layout(barmode='group', title='Profitability (Unit: Mil $)')
-    fig_profitability_column.update_layout(legend=dict(traceorder='normal', y=1.02, x=0.5, orientation="h"))
+    fig_profitability_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
     fig_profitability_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_profitability_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
@@ -275,7 +275,7 @@ if show_ltv:
                                                textposition='outside'))
 
     fig_funded_cac_ltv_column.update_layout(barmode='group', title='Funded CAC and LTV (Unit: USD)')
-    fig_funded_cac_ltv_column.update_layout(legend=dict(traceorder='normal', y=1.02, x=0.5, orientation="h"))
+    fig_funded_cac_ltv_column.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.5, orientation="h"))
     fig_funded_cac_ltv_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_funded_cac_ltv_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
