@@ -114,7 +114,6 @@ if 'data' in locals() and not data.empty:
 
     st.subheader(' Pross & Loss Simulator')
 # Visualization
-st.subheader(' Metrics Visualization:')
 
 # Checkbox to toggle Customer Base Metrics
 show_customer_base_metrics = st.checkbox("Customer Base Metrics")
