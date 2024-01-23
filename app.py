@@ -88,7 +88,7 @@ logo_url = "https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-timo-V.png"
 st.image(logo_url, use_column_width=False, width=200)
 
 # Title of the app
-st.title('Timo Digital Bank')
+st.title('Pross & Loss Simulator')
 
 # Create a sidebar for input
 st.sidebar.title("Input Settings")
@@ -115,7 +115,6 @@ if 'data' in locals() and not data.empty:
     # Process and calculate additional metrics with user input values
     processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new_customer_increases2025, new_customer_increases2026, new_customer_increases2027, new_customer_increases2028, active_rate, funding_rate)
 
-    st.subheader(' Pross & Loss Simulator')
 # Visualization
 
 # Checkbox to toggle Customer Base Metrics
