@@ -109,10 +109,10 @@ st.subheader(' Metrics Visualization:')
 show_customer_base_metrics = st.checkbox("Customer Base Metrics")
 if show_customer_base_metrics:
 
-    # Column chart for Total Customer by year
-    fig_total_customer_chart = go.Figure()
-    create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
-    st.plotly_chart(fig_total_customer_chart)
+    # Column chart for Funded Customer by year
+    fig_funded_customer_chart = go.Figure()
+    create_column_chart(fig_funded_customer_chart, processed_data['Year'], processed_data['Funded Customer'], 'Funded Customers (Unit: Thousand)')
+    st.plotly_chart(fig_funded_customer_chart)
 
     # Column chart for Active Customer by year
     fig_active_customer_chart = go.Figure()
