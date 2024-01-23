@@ -132,11 +132,8 @@ if show_customer_base_metrics:
 # Checkbox to toggle Financial Metrics
 show_financial_metrics = st.checkbox("Financial Metrics")
 if show_financial_metrics:
-    # Chart for Financial Metrics (Renamed from Revenue)
-
     # Column chart for Revenue vs GP by year
     fig_profitability_column = go.Figure()
-
     # Add revenue 
     fig_profitability_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Gross Profit'],
                                                name='Gross Profit',
