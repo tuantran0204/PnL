@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Function to calculate additional metrics
-def calculate_metrics(data, funded_cac_increase, new_customer_increases):
+def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new_customer_increases2025, new_customer_increases2026, new_customer_increases2027, new_customer_increases2028):
     # Assuming 'Year', 'Total Customer', 'Active Rate', 'New Customer', 'Funding Rate',
     # 'ARPU', 'Direct Cost', 'Churn Rate', 'Funded CAC' are columns in your data
 
@@ -30,14 +30,29 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases):
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
     data['payback'] = data['payback'].clip(lower=0)
 
-    # Apply New Customer increases for each year
-    for year, new_customer_increase_value in new_customer_increases.items():
-        mask_new_customer = (data['Year'] == year)
-        data.loc[mask_new_customer, 'New Customer'] = (data.loc[mask_new_customer, 'New Customer'] * 0) + new_customer_increase_value
+    # Calculate New customer 2024-2028
+    mask_cac = (data['Year'] == 2024)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024
+    mask_cac = (data['Year'] == 2025)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024+ new_customer_increases2025
+    mask_cac = (data['Year'] == 2026)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026
+    mask_cac = (data['Year'] == 2027)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
+    mask_cac = (data['Year'] == 2028)
+    data.loc[mask_cac, 'New Customer'] = new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
         
-    # Calculate Total customer
-    mask_cac = (data['Year'] >= 2024) & (data['Year'] <= 2028)
-    data.loc[mask_cac, 'Total_Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increase_value
+    # Calculate Total customer 2024-2028
+    mask_cac = (data['Year'] == 2024)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024
+    mask_cac = (data['Year'] == 2025)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024+ new_customer_increases2025
+    mask_cac = (data['Year'] == 2026)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026
+    mask_cac = (data['Year'] == 2027)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
+    mask_cac = (data['Year'] == 2028)
+    data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
 
     # Calculate Revenue
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
@@ -60,11 +75,15 @@ if 'data' in locals() and not data.empty:
     # Input for Funded CAC increase from 5 to 30
     new_customer_increases = {}
     for year in range(2024, 2029):
-        new_customer_increases[year] = st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 400)
     funded_cac_increase = st.sidebar.number_input('Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
+    new_customer_increases2024 = st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 400)
+    new_customer_increases2025 = st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 400)
+    new_customer_increases2026 = st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 500)
+    new_customer_increases2027 = st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 600)
+    new_customer_increases2028 = st.sidebar.number_input(f'New Customer {year} (Unit: Thousand)', min_value=100, max_value=3000, step=50, value= 700)
 
     # Process and calculate additional metrics with user input values
-    processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increases)
+    processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new_customer_increases2025, new_customer_increases2026, new_customer_increases2027, new_customer_increases2028)
 
     st.subheader(' Definition:')
     # Additional insights
