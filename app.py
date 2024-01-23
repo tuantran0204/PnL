@@ -122,10 +122,13 @@ with st.sidebar.expander("Customer Base"):
     customer_base_table = pd.DataFrame(customer_base_data)
     st.table(customer_base_table)
 
-    # Column chart for New Customer, Total Customer, and Active Customer by year
-    fig_customer_charts = go.Figure()
-    create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['New Customer'], 'New Customers (Unit: Thousand)')
-    create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
-    create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
+# Visualization
+st.subheader(' Metrics Visualization:')
 
-    st.plotly_chart(fig_customer_charts)
+# Column chart for New Customer, Total Customer, and Active Customer by year
+fig_customer_charts = go.Figure()
+create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['New Customer'], 'New Customers (Unit: Thousand)')
+create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
+create_column_chart(fig_customer_charts, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
+
+st.plotly_chart(fig_customer_charts)
