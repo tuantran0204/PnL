@@ -139,5 +139,5 @@ customer_base_data = {
     'Funded Customer': processed_data['Funded Customer'].round(0)
 }
 
-customer_base_table = pd.DataFrame(customer_base_data, index=processed_data['Year'])
+customer_base_table = pd.DataFrame(index=processed_data['Year'], customer_base_data)
 st.table(customer_base_table)
