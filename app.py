@@ -101,14 +101,29 @@ data = pd.read_csv("./data.csv")
 
 # Check if data is available and then process it
 if 'data' in locals() and not data.empty:
-    # Input for Funded CAC increase from 5 to 30
+    # Customer Metric Input Section
+    st.sidebar.subheader("Customer Metric Input")
+    
+    # Slider for Active Rate 2024-2028
     active_rate = st.sidebar.number_input('Active Rate 2024-2028 (Unit: %)', min_value=10, max_value=100, step=1, value=33)
-    funding_rate = st.sidebar.number_input('Funded Rate 2024-2028 (Unit: %)', min_value=10, max_value=100, step=1, value=53)
+    
+    # Slider for Funding Rate 2024-2028
+    funding_rate = st.sidebar.number_input('Funding Rate 2024-2028 (Unit: %)', min_value=10, max_value=100, step=1, value=53)
+
+    # New Customers Input Section
+    st.sidebar.subheader("New Customers Input")
+    
+    # Input for New Customers 2024-2028
     new_customer_increases2024 = st.sidebar.number_input('New Customer 2024 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value=400)
     new_customer_increases2025 = st.sidebar.number_input('New Customer 2025 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value=400)
     new_customer_increases2026 = st.sidebar.number_input('New Customer 2026 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value=500)
     new_customer_increases2027 = st.sidebar.number_input('New Customer 2027 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value=600)
     new_customer_increases2028 = st.sidebar.number_input('New Customer 2028 (Unit: Thousand)', min_value=100, max_value=3000, step=50, value=700)
+
+    # PnL Input Section
+    st.sidebar.subheader("PnL Input")
+
+    # Input for Funded CAC increase from 5 to 30
     funded_cac_increase = st.sidebar.number_input('Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
 
     new_customer_increases = [new_customer_increases2024, new_customer_increases2025, new_customer_increases2026, new_customer_increases2027, new_customer_increases2028]
