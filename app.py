@@ -137,24 +137,34 @@ if 'data' in locals() and not data.empty:
 show_customer_base_metrics = st.checkbox("Customer Base Metrics")
 if show_customer_base_metrics:
 
-    # Column chart for Total Customer by year
-    fig_total_customer_chart = go.Figure()
-    create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
-    st.plotly_chart(fig_total_customer_chart)
-
+    # Customer Base
+    fig_customer_column = go.Figure()
+    fig_customer_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['active_customer'],
+                                               name='Active Customers',
+                                               marker_color='#A9A9A9',  # Set color to grey
+                                               text=processed_data['active_customer'].round(2),
+                                               textposition='outside'))
+    fig_customer_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Total Customer'],
+                                               name='Total Customers',
+                                               marker_color='#563D82',  
+                                               text=processed_data['Total Customer'].round(2),
+                                               textposition='outside'))
+    fig_customer_column.update_layout(barmode='group', title='Customer Base (Unit: Thousand)')
+    fig_customer_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_customer_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+    st.plotly_chart(fig_customer_column)
     
     # Customer Acquisition
     fig_customer_acquisition_column = go.Figure()
-    fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['New Customer'],
-                                               name='New Customer',
-                                               marker_color='#2774AE',  
-                                               text=processed_data['New Customer'].round(2),
-                                               textposition='outside'))
-    # Add revenue 
     fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded Customer'],
-                                               name='Funded Customer',
+                                               name='New Funded Customers',
                                                marker_color='#A9A9A9',  # Set color to grey
                                                text=processed_data['Funded Customer'].round(2),
+                                               textposition='outside'))
+    fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['New Customer'],
+                                               name='New Customers',
+                                               marker_color='#563D82',  
+                                               text=processed_data['New Customer'].round(2),
                                                textposition='outside'))
     fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
     fig_customer_acquisition_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
