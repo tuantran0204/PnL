@@ -60,6 +60,18 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
 
     return data
 
+def create_column_chart(fig, x, y, title):
+    # Add trace to the column chart with a different color
+    fig.add_trace(go.Bar(x=x, y=y,
+                         name=title,
+                         marker_color='#563D82',
+                         text=y.round(2),
+                         textposition='outside'))
+
+    fig.update_layout(title=title)
+    fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
 # Title of the app
 st.title('PnL Simulator')
 
