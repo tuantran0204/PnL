@@ -166,7 +166,7 @@ if show_financial_metrics:
     fig_margin_chart.add_trace(go.Scatter(x=processed_data['Year'], y=processed_data['EBIT Margin'],
                                         mode='lines+text', name='EBIT Margin', line=dict(color='#EB3300'),
                                         text=processed_data['EBIT Margin'].round(2),
-                                        textposition='bottom left', textfont=dict(color='#EB3300')))
+                                        textposition='bottom right', textfont=dict(color='#EB3300')))
 
     fig_margin_chart.update_layout(barmode='group', title='Gross Margin vs EBIT Margin (%)')
     fig_margin_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
