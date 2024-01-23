@@ -41,7 +41,7 @@ def calculate_metrics(data, funded_cac_increase):
     data['payback'] = data['payback'].clip(lower=0)  # Set Payback to 0 if less than 0
 
     # Calculate New Customer
-    mask = (data['Year'] = 2024)
+    mask = (data['Year'] == 2024)
     data.loc[mask, 'New Customer'] = (data.loc[mask, 'New Customer'] * 0) + new_customer_increase_2024
 
     # Calculate Revenue
