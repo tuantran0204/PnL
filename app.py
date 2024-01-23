@@ -137,15 +137,30 @@ if 'data' in locals() and not data.empty:
 show_customer_base_metrics = st.checkbox("Customer Base Metrics")
 if show_customer_base_metrics:
 
-    # Column chart for Active Customer by year
-    fig_active_customer_chart = go.Figure()
-    create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
-    st.plotly_chart(fig_active_customer_chart)
-    # Column chart for Funded Customer by year
-    fig_funded_customer_chart = go.Figure()
-    create_column_chart(fig_funded_customer_chart, processed_data['Year'], processed_data['Funded Customer'], 'Funded Customers (Unit: Thousand)')
-    st.plotly_chart(fig_funded_customer_chart)
+    # Column chart for Total Customer by year
+    fig_total_customer_chart = go.Figure()
+    create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
+    st.plotly_chart(fig_total_customer_chart)
 
+    
+    # Customer Acquisition
+    fig_customer_acquisition_column = go.Figure()
+    fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['New Customer'],
+                                               name='New Customer',
+                                               marker_color='#2774AE',  
+                                               text=processed_data['New Customer'].round(2),
+                                               textposition='outside'))
+    # Add revenue 
+    fig_customer_acquisition_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded Customer'],
+                                               name='Funded Customer',
+                                               marker_color='#A9A9A9',  # Set color to grey
+                                               text=processed_data['Funded Customer'].round(2),
+                                               textposition='outside'))
+    fig_customer_acquisition_column.update_layout(barmode='group', title='Customer Acquisition (Unit: Thousand)')
+    fig_customer_acquisition_column.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_customer_acquisition_column.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+    st.plotly_chart(fig_customer_acquisition_column)
+    
 # Checkbox to toggle Financial Metrics
 show_financial_metrics = st.checkbox("Financial Metrics")
 if show_financial_metrics:
