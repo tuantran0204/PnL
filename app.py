@@ -84,6 +84,7 @@ if 'data' in locals() and not data.empty:
     new_customer_increase_2026 = st.sidebar.number_input('New Customer 2026 (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=500)
     new_customer_increase_2027 = st.sidebar.number_input('New Customer 2027 (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=600)
     new_customer_increase_2028 = st.sidebar.number_input('New Customer 2028 (Unit: Thousand)', min_value=100, max_value=3000, step=1, value=700)
+    funded_cac_increase = st.sidebar.number_input('Funded CAC 2024-2028 (Unit: $)', min_value=3, max_value=50, step=1, value=10)
 
     # Process and calculate additional metrics with user input values
     processed_data = calculate_metrics(data, funded_cac_increase, new_customer_increase_2024, new_customer_increase_2025, new_customer_increase_2026, new_customer_increase_2027, new_customer_increase_2028)
