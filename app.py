@@ -108,20 +108,15 @@ st.subheader(' Metrics Visualization:')
 # Checkbox to toggle Customer Base Metrics
 show_customer_base_metrics = st.checkbox("Customer Base Metrics")
 if show_customer_base_metrics:
-    # Column chart for New Customer by year
-    fig_new_customer_chart = go.Figure()
-    create_column_chart(fig_new_customer_chart, processed_data['Year'], processed_data['New Customer'], 'New Customers (Unit: Thousand)')
-    st.plotly_chart(fig_new_customer_chart)
-
-    # Column chart for Total Customer by year
-    fig_total_customer_chart = go.Figure()
-    create_column_chart(fig_total_customer_chart, processed_data['Year'], processed_data['Total Customer'], 'Total Customers (Unit: Thousand)')
-    st.plotly_chart(fig_total_customer_chart)
 
     # Column chart for Active Customer by year
     fig_active_customer_chart = go.Figure()
     create_column_chart(fig_active_customer_chart, processed_data['Year'], processed_data['active_customer'], 'Active Customers (Unit: Thousand)')
     st.plotly_chart(fig_active_customer_chart)
+    # Column chart for Funded Customer by year
+    fig_funded_customer_chart = go.Figure()
+    create_column_chart(fig_funded_customer_chart, processed_data['Year'], processed_data['Funded Customer'], 'Funded Customers (Unit: Thousand)')
+    st.plotly_chart(fig_funded_customer_chart)
 
 # Checkbox to toggle Financial Metrics
 show_financial_metrics = st.checkbox("Financial Metrics")
