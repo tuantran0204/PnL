@@ -264,61 +264,6 @@ if show_financial_metrics:
 
     st.plotly_chart(fig_margin_chart)
 
-# Checkbox to toggle Cost Structure
-show_costs_structure = st.checkbox("Costs Structure")
-if show_costs_structure:
-    # Stacked chart for Total Cost components
-    fig_cost_contribution_chart = go.Figure()
-
-    # Add Total Direct Cost to the stacked chart with a different color
-    fig_cost_contribution_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['% Direct Cost'],
-                                          name='% Direct Cost',
-                                          marker_color='#563D82',
-                                          text=processed_data['% Direct Cost'].round(2),
-                                          textposition='outside'))
-
-    # Add Funded CAC Cost
-    fig_cost_contribution_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['% Funded CAC'],
-                                          name='% Funded CAC',
-                                          marker_color='#A9A9A9',
-                                          text=processed_data['% Funded CAC'].round(2),
-                                          textposition='outside'))
-
-    # Add Retaining Cost
-    fig_cost_contribution_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['% Retaining'],
-                                          name='% Retaining',
-                                          marker_color='#FFA07A',
-                                          text=processed_data['% Retaining'].round(2),
-                                          textposition='outside'))
-
-    # Add Selling Cost
-    fig_cost_contribution_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['% Selling Cost'],
-                                          name='% Selling Cost',
-                                          marker_color='#FFD700',
-                                          text=processed_data['% Selling Cost'].round(2),
-                                          textposition='outside'))
-
-    # Add Opex
-    fig_cost_contribution_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['% Opex'],
-                                          name='% Opex',
-                                          marker_color='#32CD32',
-                                          text=processed_data['% Opex'].round(2),
-                                          textposition='outside'))
-
-    # Add Staff Cost
-    fig_cost_contribution_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['% Staff Cost'],
-                                          name='% Staff Cost',
-                                          marker_color='#8A2BE2',
-                                          text=processed_data['% Staff Cost'].round(2),
-                                          textposition='outside'))
-
-    fig_cost_contribution_chart.update_layout(barmode='stack', title='% Costs Contribution')
-    fig_cost_contribution_chart.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.25, orientation="h"))
-    fig_cost_contribution_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
-    fig_cost_contribution_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
-
-    st.plotly_chart(fig_cost_contribution_chart)
-
 
 # Checkbox to toggle Life Time Value
 show_ltv = st.checkbox("Life Time Value")
