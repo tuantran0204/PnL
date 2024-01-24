@@ -250,7 +250,7 @@ if show_financial_metrics:
 # Checkbox to toggle Life Time Value
 show_ltv = st.checkbox("Life Time Value")
 if show_ltv: 
-
+st.write("To achieve the 12-month payback target in 2024, it is essential to maintain the Funded Customer Acquisition Cost (CAC) below $9.")
     
     # Column chart for Payback by year
     fig_payback_chart = go.Figure()
@@ -268,8 +268,6 @@ if show_ltv:
     fig_payback_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_payback_chart)
-
-    st.write("To achieve the 12-month payback target in 2024, it is essential to maintain the Funded Customer Acquisition Cost (CAC) below $9.")
 
     # Column chart for Funded CAC and LTV by year
     fig_funded_cac_ltv_column = go.Figure()
@@ -313,7 +311,7 @@ if show_ltv:
 
    
 st.subheader('Thank You')
-st.write("Definition:")
-st.write("1) Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
+st.write("Notes:")
+st.write("Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
 logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
 st.image(logo_url, use_column_width=False, width=300)
