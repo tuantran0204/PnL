@@ -319,6 +319,7 @@ if show_costs_structure:
 
     st.plotly_chart(fig_cost_contribution_chart)
 
+
 # Checkbox to toggle Life Time Value
 show_ltv = st.checkbox("Life Time Value")
 if show_ltv: 
