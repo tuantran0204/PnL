@@ -77,7 +77,7 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['% Opex'] = data['Opex'] / data['Total cost'] * 100
     data['% Retaining'] = data['Retaining'] / data['Total cost'] * 100
     data['% Selling Cost'] = data['Selling Cost'] / data['Total cost'] * 100
-    data['% Funded CAC cost'] = (data['Funded CAC'] / data['Total cost']) * 100  # Fix the missing closing parenthesis here
+    data['% Funded CAC cost'] = (data['Funded CAC cost'] / data['Total cost']) * 100  # Fix the missing closing parenthesis here
     
     data['Gross Margin'] = data['Gross Profit'] / data['revenue'] * 100
     data['EBIT Margin'] = data['EBIT'] / data['revenue'] * 100
@@ -263,6 +263,47 @@ if show_financial_metrics:
     fig_margin_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_margin_chart)
+
+show_cost_structure = st.checkbox("Cost Structure")
+if show_cost_structure:
+    # Stacked chart for Total Cost
+    fig_total_cost = go.Figure()
+
+    # Add traces for each component of Total Cost
+    components = ['Total Direct Cost', 'Staff Cost', 'Opex', 'Retaining', 'Selling Cost', 'Funded CAC cost']
+    colors = ['#563D82', '#2774AE', '#EB3300', '#FF9425', '#404040', '#808080']
+
+    # Initialize an empty array to store the cumulative sum
+    cumulative_sum = [0] * len(processed_data)
+
+    for i, component in enumerate(components):
+        fig_total_cost.add_trace(go.Bar(x=processed_data['Year'],
+                                        y=processed_data[component],
+                                        name=component,
+                                        marker_color=colors[i],
+                                        text=processed_data[component].round(2),
+                                        textposition='inside'))  # Change 'center' to 'inside'
+        
+        # Update the cumulative sum for each component
+        cumulative_sum = [cumulative_sum[j] + processed_data[component][j] for j in range(len(processed_data))]
+
+    # Add text annotations for the total sum directly on the chart
+    for year, total_sum in zip(processed_data['Year'], cumulative_sum):
+        fig_total_cost.add_annotation(
+            x=year,
+            y=total_sum,
+            text=f'{total_sum:.2f}',
+            showarrow=False,
+            font=dict(size=10),
+            yanchor='bottom'
+        )
+
+    fig_total_cost.update_layout(barmode='stack', title='Total Cost (Unit: Mil $)')
+    fig_total_cost.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
+    fig_total_cost.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_total_cost.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_total_cost)
 
 
 # Checkbox to toggle Life Time Value
