@@ -61,10 +61,17 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
     data['Gross Profit'] = data['gp_per_active'] * data['active_customer'] / 1000
-    data['EBIT'] =  data['Gross Profit'] - ((data['Staff Cost'] +  data['Opex'] + data['Retaining'] + data['Selling Cost']) / 1000000) - ((data['Funded CAC'] * data['Funded Customer'])/1000)
+
+    data['Total Direct Cost'] = data['Direct Cost'] * data['active_customer'] / 1000
+    data['Staff Cost'] = data['Staff Cost'] / 1000000
+    data['Opex'] = data['Opex'] / 1000000
+    data['Retaining'] = data['Retaining'] / 1000000
+    data['Selling Cost'] = data['Selling Cost'] / 1000000
+    data['Funded CAC cost'] = (data['Funded CAC'] * data['Funded Customer'])/1000
+    data['EBIT'] =  data['Gross Profit'] - (data['Staff Cost'] +  data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost'])
+    
     data['Gross Margin'] = data['Gross Profit'] / data['revenue']  * 100
     data['EBIT Margin'] = data['EBIT'] / data['revenue']  * 100
-
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
@@ -247,6 +254,61 @@ if show_financial_metrics:
 
     st.plotly_chart(fig_margin_chart)
 
+# Checkbox to toggle Cost Structure
+show_costs_structure = st.checkbox("Costs Structure")
+if show_costs_structure:
+    # Stacked chart for Total Cost components
+    fig_total_cost_chart = go.Figure()
+
+    # Add Total Direct Cost to the stacked chart with a different color
+    fig_total_cost_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Total Direct Cost'],
+                                          name='Total Direct Cost',
+                                          marker_color='#563D82',
+                                          text=processed_data['Total Direct Cost'].round(2),
+                                          textposition='outside'))
+
+    # Add Funded CAC Cost
+    fig_total_cost_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Funded CAC cost'],
+                                          name='Funded CAC Cost',
+                                          marker_color='#A9A9A9',
+                                          text=processed_data['Funded CAC cost'].round(2),
+                                          textposition='outside'))
+
+    # Add Retaining Cost
+    fig_total_cost_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Retaining'],
+                                          name='Retaining Cost',
+                                          marker_color='#FFA07A',
+                                          text=processed_data['Retaining'].round(2),
+                                          textposition='outside'))
+
+    # Add Selling Cost
+    fig_total_cost_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Selling Cost'],
+                                          name='Selling Cost',
+                                          marker_color='#FFD700',
+                                          text=processed_data['Selling Cost'].round(2),
+                                          textposition='outside'))
+
+    # Add Opex
+    fig_total_cost_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Opex'],
+                                          name='Opex',
+                                          marker_color='#32CD32',
+                                          text=processed_data['Opex'].round(2),
+                                          textposition='outside'))
+
+    # Add Staff Cost
+    fig_total_cost_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['Staff Cost'],
+                                          name='Staff Cost',
+                                          marker_color='#8A2BE2',
+                                          text=processed_data['Staff Cost'].round(2),
+                                          textposition='outside'))
+
+    fig_total_cost_chart.update_layout(barmode='stack', title='Total Cost Components (Unit: Mil $)')
+    fig_total_cost_chart.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0.25, orientation="h"))
+    fig_total_cost_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+    fig_total_cost_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+    st.plotly_chart(fig_total_cost_chart)
+
 # Checkbox to toggle Life Time Value
 show_ltv = st.checkbox("Life Time Value")
 if show_ltv: 
@@ -306,6 +368,7 @@ if show_ltv:
     fig_line_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_line_chart)
+
 
 st.subheader('Thank You')
 logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
