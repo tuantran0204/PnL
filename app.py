@@ -55,32 +55,37 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['active_customer'] = data['Total Customer'] * (data['Active Rate']/100)
 
     # Calculate Revenue, GP/Active, total gross profit, LTV, LTV/CAC, Payback
-    
-    data['Funded Customer'] = data['New Customer'] * (data['Funding Rate']/100)
+
+    # Calculate Revenue, GP/Active, total gross profit, LTV, LTV/CAC, Payback
+    data['Funded Customer'] = data['New Customer'] * (data['Funding Rate'] / 100)
     
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
     data['Gross Profit'] = data['gp_per_active'] * data['active_customer'] / 1000
+    
     data['Total Direct Cost'] = data['Direct Cost'] * data['active_customer'] / 1000
     data['Staff Cost'] = data['Staff Cost'] / 1000000
     data['Opex'] = data['Opex'] / 1000000
     data['Retaining'] = data['Retaining'] / 1000000
     data['Selling Cost'] = data['Selling Cost'] / 1000000
-    data['Funded CAC cost'] = (data['Funded CAC'] * data['Funded Customer'])/1000
-    data['Total cost'] = data['Total Direct Cost'] + data['Staff Cost'] +  data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost']
-    data['EBIT'] =  data['Gross Profit'] - (data['Staff Cost'] +  data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost'])
-    data['% Direct Cost'] = data['Total Direct Cost']/data['Total cost'] * 100
-    data['% Staff Cost'] = data['Staff Cost'] /data['Total cost'] * 100
-    data['% Opex'] = data['Opex']/data['Total cost'] * 100
-    data['% Retaining'] = data['Retaining']/data['Total cost'] * 100
-    data['% Selling Cost'] = data['Selling Cost']/data['Total cost'] * 100
-    data['% Funded CAC cost'] = (data['Funded CAC']/data['Total cost'] * 100
-    data['Gross Margin'] = data['Gross Profit'] / data['revenue']  * 100
-    data['EBIT Margin'] = data['EBIT'] / data['revenue']  * 100
+    data['Funded CAC cost'] = (data['Funded CAC'] * data['Funded Customer']) / 1000
+    data['Total cost'] = data['Total Direct Cost'] + data['Staff Cost'] + data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost']
+    data['EBIT'] = data['Gross Profit'] - (data['Staff Cost'] + data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost'])
+    
+    data['% Direct Cost'] = data['Total Direct Cost'] / data['Total cost'] * 100
+    data['% Staff Cost'] = data['Staff Cost'] / data['Total cost'] * 100
+    data['% Opex'] = data['Opex'] / data['Total cost'] * 100
+    data['% Retaining'] = data['Retaining'] / data['Total cost'] * 100
+    data['% Selling Cost'] = data['Selling Cost'] / data['Total cost'] * 100
+    data['% Funded CAC cost'] = (data['Funded CAC'] / data['Total cost']) * 100  # Fix the missing closing parenthesis here
+    
+    data['Gross Margin'] = data['Gross Profit'] / data['revenue'] * 100
+    data['EBIT Margin'] = data['EBIT'] / data['revenue'] * 100
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
     data['payback'] = data['payback'].clip(lower=0)
+
 
     return data
 
