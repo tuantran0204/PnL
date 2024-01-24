@@ -306,11 +306,9 @@ if show_ltv:
     fig_line_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_line_chart)
-    
 
-   
-st.subheader('Thank You')
 st.write("Notes:")
 st.write("Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
+st.subheader('Thank You')
 logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
 st.image(logo_url, use_column_width=False, width=300)
