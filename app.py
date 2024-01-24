@@ -250,8 +250,7 @@ if show_financial_metrics:
 # Checkbox to toggle Life Time Value
 show_ltv = st.checkbox("Life Time Value")
 if show_ltv: 
-st.write("To achieve the 12-month payback target in 2024, it is essential to maintain the Funded Customer Acquisition Cost (CAC) below $9.")
-    
+
     # Column chart for Payback by year
     fig_payback_chart = go.Figure()
 
