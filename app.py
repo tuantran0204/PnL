@@ -27,7 +27,7 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     mask_cac = (data['Year'] >= 2024) & (data['Year'] <= 2028)
     data.loc[mask_cac, 'Funding Rate'] = funding_rate
 
-    # Calculate New customer 2024-2028
+    # Calculate
     mask_cac = (data['Year'] == 2024)
     data.loc[mask_cac, 'New Customer'] = new_customer_increases2024
     mask_cac = (data['Year'] == 2025)
@@ -38,8 +38,6 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data.loc[mask_cac, 'New Customer'] = new_customer_increases2027
     mask_cac = (data['Year'] == 2028)
     data.loc[mask_cac, 'New Customer'] = new_customer_increases2028
-        
-    # Calculate Total customer 2024-2028
     mask_cac = (data['Year'] == 2024)
     data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024
     mask_cac = (data['Year'] == 2025)
@@ -50,19 +48,11 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027
     mask_cac = (data['Year'] == 2028)
     data.loc[mask_cac, 'Total Customer'] = (data.loc[mask_cac, 'Total Customer']) + new_customer_increases2024 + new_customer_increases2025 + new_customer_increases2026 + new_customer_increases2027 + new_customer_increases2028
-
-    # Calculate active customer and inactive customer for all years
     data['active_customer'] = data['Total Customer'] * (data['Active Rate']/100)
-
-    # Calculate Revenue, GP/Active, total gross profit, LTV, LTV/CAC, Payback
-
-    # Calculate Revenue, GP/Active, total gross profit, LTV, LTV/CAC, Payback
     data['Funded Customer'] = data['New Customer'] * (data['Funding Rate'] / 100)
-    
     data['revenue'] = data['ARPU'] * data['active_customer'] / 1000
     data['gp_per_active'] = (data['ARPU'] - data['Direct Cost'])
     data['Gross Profit'] = data['gp_per_active'] * data['active_customer'] / 1000
-    
     data['Total Direct Cost'] = data['Direct Cost'] * data['active_customer'] / 1000
     data['Staff Cost'] = data['Staff Cost'] / 1000000
     data['Opex'] = data['Opex'] / 1000000
@@ -71,22 +61,18 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['Funded CAC cost'] = (data['Funded CAC'] * data['Funded Customer']) / 1000
     data['Total cost'] = data['Total Direct Cost'] + data['Staff Cost'] + data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost']
     data['EBIT'] = data['Gross Profit'] - (data['Staff Cost'] + data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost'])
-    
     data['% Direct Cost'] = data['Total Direct Cost'] / data['Total cost'] * 100
     data['% Staff Cost'] = data['Staff Cost'] / data['Total cost'] * 100
     data['% Opex'] = data['Opex'] / data['Total cost'] * 100
     data['% Retaining'] = data['Retaining'] / data['Total cost'] * 100
     data['% Selling Cost'] = data['Selling Cost'] / data['Total cost'] * 100
     data['% Funded CAC cost'] = (data['Funded CAC cost'] / data['Total cost']) * 100  # Fix the missing closing parenthesis here
-    
     data['Gross Margin'] = data['Gross Profit'] / data['revenue'] * 100
     data['EBIT Margin'] = data['EBIT'] / data['revenue'] * 100
     data['ltv'] = (data['ARPU'] - data['Direct Cost']) / data['Churn Rate']
     data['ltv_cac_ratio'] = data['ltv'] / data['Funded CAC']
     data['payback'] = data['Funded CAC'] / (data['ARPU'] - data['Direct Cost'])
     data['payback'] = data['payback'].clip(lower=0)
-
-
     return data
 
 def create_column_chart(fig, x, y, title):
@@ -96,12 +82,10 @@ def create_column_chart(fig, x, y, title):
                          marker_color='#563D82',
                          text=y.round(2),
                          textposition='outside'))
-
     fig.update_layout(title=title)
     fig.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig.update_yaxes(showgrid=False)  # Remove y-axis gridlines
     
-
 logo_url = "https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-timo-V.png"
 st.image(logo_url, use_column_width=False, width=200)
 
@@ -296,8 +280,7 @@ if show_cost_structure:
             text=f'{total_sum:.2f}',
             showarrow=False,
             font=dict(size=10),
-            yanchor='bottom'
-        )
+            yanchor='bottom')
 
     fig_total_cost.update_layout(barmode='stack', title='Total Cost by Structure (Unit: Mil $)')
     fig_total_cost.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
@@ -323,9 +306,8 @@ if show_cost_structure:
                                                text=processed_data[component].round(2),
                                                textposition='inside'))  # Change 'center' to 'inside'
 
-        # Update the cumulative sum for each component
-        cumulative_sum = [cumulative_sum[j] + processed_data[component][j] for j in range(len(processed_data))]
-
+    # Update the cumulative sum for each component
+    cumulative_sum = [cumulative_sum[j] + processed_data[component][j] for j in range(len(processed_data))]
     # Add text annotations for the total sum directly on the chart
     for year, total_sum in zip(processed_data['Year'], cumulative_sum):
         fig_cost_contribution.add_annotation(
@@ -334,8 +316,7 @@ if show_cost_structure:
             text=f'{total_sum:.2f}',
             showarrow=False,
             font=dict(size=10),
-            yanchor='bottom'
-        )
+            yanchor='bottom')
 
     fig_cost_contribution.update_layout(barmode='stack', title='% Contribution')
     fig_cost_contribution.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
@@ -344,7 +325,6 @@ if show_cost_structure:
 
     st.plotly_chart(fig_cost_contribution)
 
-   
 # Checkbox to toggle Life Time Value
 show_ltv = st.checkbox("Life Time Value")
 if show_ltv: 
@@ -360,7 +340,6 @@ if show_ltv:
                                        textposition='outside'))
 
     fig_payback_chart.update_layout(title='Payback (Unit: Year)')
-
     fig_payback_chart.update_xaxes(showgrid=False)  # Remove x-axis gridlines
     fig_payback_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
@@ -404,7 +383,6 @@ if show_ltv:
     fig_line_chart.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_line_chart)
-
 
 st.subheader('Thank You')
 logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
