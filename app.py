@@ -355,7 +355,7 @@ if show_ltv:
     # Add Payback to the column chart with a different color
     fig_payback_chart.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['payback'],
                                        name='Payback',
-                                       marker_color='#EB3300',  # Set color to grey
+                                       marker_color='#563D82',
                                        text=processed_data['payback'].round(2),
                                        textposition='outside'))
 
@@ -379,7 +379,7 @@ if show_ltv:
     # Add LTV to the column chart with blue color
     fig_funded_cac_ltv_column.add_trace(go.Bar(x=processed_data['Year'], y=processed_data['ltv'],
                                                name='LTV',
-                                               marker_color='#EB3300',  # Set color to blue
+                                               marker_color='#2774AE',  # Set color to blue
                                                text=processed_data['ltv'].round(2),
                                                textposition='outside'))
 
