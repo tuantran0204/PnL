@@ -151,7 +151,7 @@ if 'data' in locals() and not data.empty:
 # Visualization
 
 # Checkbox to toggle Customer Base and Acquisition Metrics
-show_customer_metrics = st.checkbox("Customer Metrics")
+show_customer_metrics = st.checkbox("Customer Base")
 if show_customer_metrics:
 
     # Customer Base
@@ -204,7 +204,7 @@ if show_customer_metrics:
 
     
 # Checkbox to toggle Financial Metrics
-show_financial_metrics = st.checkbox("Financial Metrics")
+show_financial_metrics = st.checkbox("Profitability Metrics")
 if show_financial_metrics:
     # Column chart for Revenue vs GP by year
     fig_profitability_column = go.Figure()
