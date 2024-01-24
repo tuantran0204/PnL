@@ -304,6 +304,44 @@ if show_cost_structure:
     fig_total_cost.update_yaxes(showgrid=False)  # Remove y-axis gridlines
 
     st.plotly_chart(fig_total_cost)
+    # Stacked chart for Total Cost
+fig_cost_contribution = go.Figure()
+
+# Add traces for each component of Total Cost Contribution (%)
+components = ['% Direct Cost', '% Staff Cost', '% Opex', '% Retaining', '% Selling Cost', '% Funded CAC cost']
+colors = ['#563D82', '#2774AE', '#EB3300', '#FF9425', '#404040', '#808080']
+
+# Initialize an empty array to store the cumulative sum
+cumulative_sum = [0] * len(processed_data)
+
+for i, component in enumerate(components):
+    fig_cost_contribution.add_trace(go.Bar(x=processed_data['Year'],
+                                           y=processed_data[component],
+                                           name=component,
+                                           marker_color=colors[i],
+                                           text=processed_data[component].round(2),
+                                           textposition='inside'))  # Change 'center' to 'inside'
+    
+    # Update the cumulative sum for each component
+    cumulative_sum = [cumulative_sum[j] + processed_data[component][j] for j in range(len(processed_data))]
+
+# Add text annotations for the total sum directly on the chart
+for year, total_sum in zip(processed_data['Year'], cumulative_sum):
+    fig_cost_contribution.add_annotation(
+        x=year,
+        y=total_sum,
+        text=f'{total_sum:.2f}',
+        showarrow=False,
+        font=dict(size=10),
+        yanchor='bottom'
+    )
+
+fig_cost_contribution.update_layout(barmode='stack', title='Total Cost Contribution (%)')
+fig_cost_contribution.update_layout(legend=dict(traceorder='normal', y=-0.15, x=0, orientation="h"))
+fig_cost_contribution.update_xaxes(showgrid=False)  # Remove x-axis gridlines
+fig_cost_contribution.update_yaxes(showgrid=False)  # Remove y-axis gridlines
+
+st.plotly_chart(fig_cost_contribution)
 
 
 # Checkbox to toggle Life Time Value
