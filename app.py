@@ -270,6 +270,8 @@ if show_ltv:
 
     st.plotly_chart(fig_payback_chart)
 
+    st.write("To achieve the 12-month payback target in 2024, it is essential to maintain the Funded Customer Acquisition Cost (CAC) below $9.")
+
     # Column chart for Funded CAC and LTV by year
     fig_funded_cac_ltv_column = go.Figure()
 
