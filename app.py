@@ -90,7 +90,7 @@ logo_url = "https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-timo-V.png"
 st.image(logo_url, use_column_width=False, width=200)
 
 # Title of the app
-st.title('Pross & Loss Simulator')
+st.title('Profit & Loss Simulator')
 
 # Create a sidebar for input
 st.sidebar.title("Input Settings")
