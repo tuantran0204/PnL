@@ -251,8 +251,7 @@ if show_financial_metrics:
 show_ltv = st.checkbox("Life Time Value")
 if show_ltv: 
 
-    # Additional insights
-    st.write("Definition: Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
+    
     # Column chart for Payback by year
     fig_payback_chart = go.Figure()
 
@@ -314,6 +313,7 @@ if show_ltv:
 
    
 st.subheader('Thank You')
-
+st.write("Definition:")
+st.write("1) Payback is calculated using the formula of dividing Funded CAC by GP per Active.")
 logo_url = "https://timo.vn/wp-content/uploads/2021/01/Open-account-instantly.png"
 st.image(logo_url, use_column_width=False, width=300)
