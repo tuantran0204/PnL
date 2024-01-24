@@ -69,6 +69,7 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['Selling Cost'] = data['Selling Cost'] / 1000000
     data['Funded CAC cost'] = (data['Funded CAC'] * data['Funded Customer'])/1000
     data['Total cost'] = data['Total Direct Cost'] + data['Staff Cost'] +  data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost']
+    data['EBIT'] =  data['Gross Profit'] - (data['Staff Cost'] +  data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost'])
     
     data['% Direct Cost'] = data['Total Direct Cost']/data['Total cost'] * 100
     data['% Staff Cost'] = data['Staff Cost'] /data['Total cost'] * 100
@@ -76,9 +77,6 @@ def calculate_metrics(data, funded_cac_increase, new_customer_increases2024, new
     data['% Retaining'] = data['Retaining']/data['Total cost'] * 100
     data['% Selling Cost'] = data['Selling Cost']/data['Total cost'] * 100
     data['% Funded CAC cost'] = (data['Funded CAC']/data['Total cost'] * 100
-    
-    
-    data['EBIT'] =  data['Gross Profit'] - (data['Staff Cost'] +  data['Opex'] + data['Retaining'] + data['Selling Cost'] + data['Funded CAC cost'])
     
     data['Gross Margin'] = data['Gross Profit'] / data['revenue']  * 100
     data['EBIT Margin'] = data['EBIT'] / data['revenue']  * 100
